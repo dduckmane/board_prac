@@ -30,7 +30,7 @@ public class loadController {
 
     private final BoardFilesRepository boardFilesRepository;
 
-    private static final String UPLOAD_PATH = "C:\\sl_dev\\upload";
+    private static final String UPLOAD_PATH = "/Users/Board/upload";
     @ResponseBody
     @GetMapping(value ="/images", produces = MediaType.IMAGE_PNG_VALUE)
     public UrlResource downloadImage(@RequestParam Long itemId) throws

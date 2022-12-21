@@ -40,7 +40,7 @@ public class BoardController {
     private final QueryAdapterHandler adapterHandler;
     private final MemberService memberService;
 
-    private static final String UPLOAD_PATH = "C:\\sl_dev\\upload";
+    private static final String UPLOAD_PATH = "/Users/Board/upload";
 
     @GetMapping("/list")
     //제목으로 검색 추가
