@@ -1,0 +1,58 @@
+h1 {
+  display: block;
+  
+}
+
+/* Bordered form */
+form {
+  border: 3px solid #f1f1f1;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding: 5%;
+  
+    
+  }
+
+  
+  
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  
+ 
+  
+
+  
+  /*4 footer*/
+footer {
+    clear: both;
+    height: 100px;
+    background: #04AA6D;
+    margin: auto;
+  }

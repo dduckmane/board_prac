@@ -1,0 +1,78 @@
+/* 맛집리스트 */
+h1 {
+  text-align: center;
+}
+
+.contents {
+  box-sizing: border-box;
+}
+
+
+
+.contents .status {
+  text-align: center;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+.inner {
+  height: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #e3e8ef;
+  border-bottom: 1px solid #adadad;
+}
+
+.list-wrap {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.list-wrap .list li .list-box {
+  width: 1000px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #adadad;
+}
+
+.list-wrap .list li div {
+  float: left;
+}
+
+.list-wrap .list .text-box {
+  margin-left: 50px;
+}
+
+/*글쓰기 */
+#board-write-wrap {
+  width: 1000px;
+  height: 800px;
+  margin: 0 auto;
+}
+
+#board-write-wrap h1 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.ck-editor__editable_inline {
+  min-height: 560px;
+}
+
+#board-write-wrap input {
+  margin-top: 20px;
+  float: right;
+  width: 80px;
+  height: 25px;
+}
+
+/* board detail */
+.content-container .text-area {
+  width: 1080px;
+  margin: 100px auto 100px;
+  height: 500px;
+
+  border: 1px solid #333;
+}
+
+
