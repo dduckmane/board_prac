@@ -16,8 +16,10 @@
     <div class="section-content overlay d-flex justify-content-center align-items-center">
         <div class="container-xxl">
             <div class="row align-items-center">
-                <div class="col-md-9 welcome main-title">
-                    <h1 class="welcome-title fw-light">&nbsp 마음 껏 리뷰를 남겨 주세요</h1>
+                <div class="col welcome main-title">
+                    <p style="font-size: 2rem;" class="welcome-title fw-light">
+                        마음껏 리뷰를 남겨주세요
+                    </p>
                 </div>
             </div>
         </div>
@@ -44,17 +46,15 @@
             </div>
 
             <div class="input-group mb-3">
+
                 <label class="input-group-text" for="inputGroupSelect04">대표 지역</label>
+
                 <select class="form-select" name="representativeArea" id="inputGroupSelect04" aria-label="Example select with button addon">
-                    <option value="Seoul">서울</option>
-                    <option value="gyeonggiDo">경기</option>
-                    <option value="incheon">인천</option>
-                    <option value="gangwonDo">강원도</option>
-                    <option value="jeollaBukDo">전라북도</option>
-                    <option value="jeollaNamDo">전라남도</option>
-                    <option value="gyeongsangBukDo">경상북도</option>
-                    <option value="gyeongsangNamDo">경상남도</option>
-                    <option value="chungcheongDo">충청도</option>
+
+                    <c:forEach var="region" items="${regions}">
+                        <option value=${region}>${region.description}</option>
+                    </c:forEach>
+
                 </select>
 
                 <input type="radio" class="btn-check" name="options" id="option" disabled>

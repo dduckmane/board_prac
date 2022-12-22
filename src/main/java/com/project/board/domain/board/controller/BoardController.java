@@ -4,6 +4,7 @@ import com.project.board.domain.board.controller.init.BoardInit;
 import com.project.board.domain.board.controller.request.ListParam;
 import com.project.board.domain.board.domain.Address;
 import com.project.board.domain.board.domain.boardenum.Category;
+import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.board.domain.boardenum.Tag;
 import com.project.board.domain.board.domain.UploadFile;
 import com.project.board.domain.board.dto.request.BoardDetailsDto;
@@ -58,6 +59,10 @@ public class BoardController {
     @ModelAttribute("categories")
     public List<Category> categories(){
         return boardInit.getCategories();
+    }
+    @ModelAttribute("regions")
+    public List<Regions> regions(){
+        return boardInit.getRegions();
     }
 
     @GetMapping("/list")

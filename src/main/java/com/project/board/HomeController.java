@@ -1,5 +1,6 @@
 package com.project.board;
 
+import com.project.board.domain.board.controller.init.BoardInit;
 import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.board.dto.response.BestDto;
 import com.project.board.domain.board.repository.BoardRepository;
@@ -26,22 +27,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
     private final BoardRepository boardRepository;
+    private final BoardInit boardInit;
+
 
     @ModelAttribute("regions")
     public List<Regions> regions(){
-        List<Regions> regions =new ArrayList<>();
-
-        regions.add(Regions.SEOUL);
-        regions.add(Regions.GYEONGGI);
-        regions.add(Regions.INCHEON);
-        regions.add(Regions.GANG);
-        regions.add(Regions.JS);
-        regions.add(Regions.JN);
-        regions.add(Regions.GS);
-        regions.add(Regions.GN);
-        regions.add(Regions.JEJU);
-
-        return regions;
+        return boardInit.getRegions();
     }
 
     @GetMapping({ "", "/" })

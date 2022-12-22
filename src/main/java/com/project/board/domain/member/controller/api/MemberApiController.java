@@ -23,6 +23,7 @@ public class MemberApiController {
             @AuthenticationPrincipal PrincipalDetails principalDetails
             , @RequestBody ChoiceBoard choiceBoard
             ){
+
         memberService.choiceBoard(
                 choiceBoard.getBoardId()
                 , principalDetails.getMember());
@@ -37,6 +38,7 @@ public class MemberApiController {
     public List<Long> findChoiceBoardId(
             @AuthenticationPrincipal PrincipalDetails principalDetails
     ){
+
         return memberRepository
                 .findByUsername(principalDetails.getUsername())
                 .orElseThrow()

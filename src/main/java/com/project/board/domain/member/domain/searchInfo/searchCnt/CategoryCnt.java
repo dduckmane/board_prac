@@ -54,9 +54,9 @@ public class CategoryCnt implements AddCnt {
 
     private Integer getScoreByGroupId(int groupId) {
         if(groupId ==1) return orderMap.get("categoryOption1");
-        if(groupId ==2) return orderMap.get("categoryOption4");
+        if(groupId ==2) return orderMap.get("categoryOption2");
         if(groupId ==3) return orderMap.get("categoryOption3");
-        if(groupId ==4) return orderMap.get("categoryOption2");
+        if(groupId ==4) return orderMap.get("categoryOption4");
 
         throw new IllegalArgumentException("wrong option");
     }

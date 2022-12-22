@@ -89,5 +89,10 @@ custom:
     path: "/Users/Board/upload"
   ckeditor:
     path: "/Users/Board/Pictures/CKPictures/"
+server:
+  servlet:
+    session:
+      timeout: 1800
+
 
 
