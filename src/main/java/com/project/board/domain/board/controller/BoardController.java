@@ -2,6 +2,8 @@ package com.project.board.domain.board.controller;
 
 import com.project.board.domain.board.controller.request.ListParam;
 import com.project.board.domain.board.domain.Address;
+import com.project.board.domain.board.domain.ENUM.Regions;
+import com.project.board.domain.board.domain.ENUM.Tag;
 import com.project.board.domain.board.domain.UploadFile;
 import com.project.board.domain.board.dto.request.BoardDetailsDto;
 import com.project.board.domain.board.dto.request.BoardDto;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,6 +44,19 @@ public class BoardController {
     private final MemberService memberService;
 
     private static final String UPLOAD_PATH = "/Users/Board/upload";
+
+    @ModelAttribute("tags")
+    public List<Tag> tag(){
+        List<Tag> tags=new ArrayList<>();
+
+        tags.add(Tag.PRICE);
+        tags.add(Tag.RESERVATION);
+        tags.add(Tag.MOOD);
+        tags.add(Tag.PLAY);
+
+        return tags;
+    }
+
 
     @GetMapping("/list")
     //제목으로 검색 추가

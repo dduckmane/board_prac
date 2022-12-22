@@ -15,11 +15,10 @@ public class SearchByRegionAdapter implements findQueryAdapter{
     @Override
     public boolean supports(Object param) {
         if(!(param instanceof String)) return false;
-        String regions="Seoul gyeonggiDo incheon gangwonDo jeollaBukDo jeollaNamDo gyeongsangBukDo gyeongsangNamDo chungcheongDo";
+        String regions="SEOUL GYEONGGI INCHEON GANG JN JS GS GN JEJU";
         String region = (String) param;
 
         boolean contains = regions.contains(region);
-        System.out.println("contains = " + contains);
         return contains;
     }
 

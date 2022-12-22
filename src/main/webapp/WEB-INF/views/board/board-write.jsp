@@ -60,18 +60,10 @@
                 <input type="radio" class="btn-check" name="options" id="option" disabled>
                 <label class="btn btn-outline-secondary" for="option">태그설정</label>
 
-                <input type="checkbox" class="btn-check" name="tag" value="atmosphere" id="option1">
-                <label class="btn btn-outline-secondary" for="option1">분위기</label>
-
-                <input type="checkbox" class="btn-check" name="tag" value="money" id="option2">
-                <label class="btn btn-outline-secondary" for="option2">가성비</label>
-
-                <input type="checkbox" class="btn-check" name="tag" value="reservation" id="option3">
-                <label class="btn btn-outline-secondary" for="option3">예약 가능</label>
-
-                <input type="checkbox" class="btn-check" name="tag" value="play" id="option4">
-                <label class="btn btn-outline-secondary" for="option4">놀기 좋은</label>
-
+                <c:forEach var="tag" varStatus="status" items="${tags}">
+                    <input type="checkbox" class="btn-check" name="tag" value=${tag} id=${status.index}>
+                    <label class="btn btn-outline-secondary" for=${status.index}>${tag.description}</label>
+                </c:forEach>
 
             </div>
 

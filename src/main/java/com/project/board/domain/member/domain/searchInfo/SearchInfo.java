@@ -48,6 +48,7 @@ public class SearchInfo {
     }
 
     public void addCnt(Member member, String type, String param){
+        if (type.equals("sort")||type.equals("name")) return;
         // 각 카테고리 별로 검색한 횟 수를 가져온다.
         // adapter 패턴의 변형
         // type 바탕으로 type 에 맞는 handler 를 가져온다.

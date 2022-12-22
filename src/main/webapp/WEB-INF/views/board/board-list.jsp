@@ -45,6 +45,8 @@
     </div>
 </section>
 
+
+
 <div class="d-flex container-fluid mt-2">
     <div class="dropdown">
         <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,13 +76,11 @@
                         <select class="form-select" id="inputGroupSelect3"
                                 aria-label="Example select with button addon"
                                 name="tag">
+                                <option value="">태그로 검색</option>
 
-                            <option value="">태그로 검색</option>
-                            <option value="atmosphere">분위기 좋은</option>
-                            <option value="money">가성비</option>
-                            <option value="reservation">예약 가능</option>
-                            <option value="play">놀기 좋은</option>
-
+                                <c:forEach var="tag" items="${tags}">
+                                    <option value="${tag}">${tag.description}</option>
+                                </c:forEach>
                         </select>
                     </div>
 

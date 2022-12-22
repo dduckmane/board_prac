@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.project.board.domain.board.domain.ENUM.Tag.*;
 import static com.project.board.domain.member.domain.searchInfo.SearchInfo.TAG;
 import static com.project.board.global.util.OrderUtils.order;
 
@@ -30,9 +31,9 @@ public class TagCnt implements AddCnt {
     @Override
     public void addCnt(String tag) {
 
-        if(tag.contains("atmosphere")) atmosphere++;
-        else if(tag.contains("money")) money++;
-        else if(tag.contains("reservation")) reservation++;
+        if(tag.contains(MOOD.toString())) atmosphere++;
+        else if(tag.contains(PRICE.toString())) money++;
+        else if(tag.contains(RESERVATION.toString())) reservation++;
         else play++;
     }
     public int getScore(String tag){
@@ -54,10 +55,10 @@ public class TagCnt implements AddCnt {
     private Integer getScoreByGroupId(String tag) {
         int sum=0;
 
-        if(tag.contains("atmosphere"))  sum+=orderMap.get("atmosphere");
-        if(tag.equals("money")) sum+= orderMap.get("money");
-        if(tag.equals("reservation")) sum+= orderMap.get("reservation");
-        if(tag.equals("play")) sum+= orderMap.get("play");
+        if(tag.contains(MOOD.toString()))  sum+=orderMap.get("atmosphere");
+        if(tag.equals(PRICE.toString())) sum+= orderMap.get("money");
+        if(tag.equals(RESERVATION.toString())) sum+= orderMap.get("reservation");
+        if(tag.equals(PLAY.toString())) sum+= orderMap.get("play");
 
         return sum;
     }

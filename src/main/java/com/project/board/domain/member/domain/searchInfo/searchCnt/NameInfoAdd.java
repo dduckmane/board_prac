@@ -19,20 +19,20 @@ public class NameInfoAdd implements AddCnt {
     @Override
     public Boolean support(String name) {
 
-        return name.equals("title");
+        return name.equals("title")||name.equals("all");
     }
 
     @Override
     public void addCnt(String title) {
-        getNameByBlank(title).stream().forEach(search->{
+        boolean duplication=false;
 
-            if(orderMap.isEmpty())orderMap.put(search,1);
-            orderMap.entrySet().stream().forEach(store->{
+        for (String name : getNameByBlank(title)) {
+            //중복을 검사함
+            for (String key : orderMap.keySet()) duplication = key.equals(name);
 
-                if(store.getKey().equals(search)) orderMap.put(search,orderMap.get(search)+1);
-                else orderMap.put(search,1);
-            });
-        });
+            //중복이 없다면 추가하고 있다면 증가
+            orderMap.put(name, duplication == false ? 1 : orderMap.get(name) + 1);
+        }
     }
 
     public int getScore(String title){
