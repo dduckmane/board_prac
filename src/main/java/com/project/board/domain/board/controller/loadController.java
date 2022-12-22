@@ -8,6 +8,7 @@ import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.global.util.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -30,7 +31,8 @@ public class loadController {
 
     private final BoardFilesRepository boardFilesRepository;
 
-    private static final String UPLOAD_PATH = "/Users/Board/upload";
+    @Value("${custom.upload.path}")
+    private String UPLOAD_PATH;
     @ResponseBody
     @GetMapping(value ="/images", produces = MediaType.IMAGE_PNG_VALUE)
     public UrlResource downloadImage(@RequestParam Long itemId) throws

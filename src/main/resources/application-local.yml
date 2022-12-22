@@ -84,4 +84,10 @@ logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.type: trace
 
+custom:
+  upload:
+    path: "/Users/Board/upload"
+  ckeditor:
+    path: "/Users/Board/Pictures/CKPictures/"
+
 

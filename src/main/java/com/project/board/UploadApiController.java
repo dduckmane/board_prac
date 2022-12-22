@@ -2,6 +2,7 @@ package com.project.board;
 
 import com.project.board.global.util.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,8 @@ import java.io.*;
 @Controller
 @Slf4j
 public class UploadApiController {
-
-    private static final String UPLOAD_PATH = "/Users/Board/Pictures/CKPictures/";
+    @Value("${custom.ckeditor.path}")
+    private String UPLOAD_PATH;
 
     @PostMapping("food/imageUpload.do")
     // 이미지 업로드

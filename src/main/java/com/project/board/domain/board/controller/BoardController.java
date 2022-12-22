@@ -19,6 +19,7 @@ import com.project.board.domain.page.PageMaker;
 import com.project.board.global.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -47,7 +48,8 @@ public class BoardController {
     private final QueryAdapterHandler adapterHandler;
     private final MemberService memberService;
     private final BoardInit boardInit;
-    private static final String UPLOAD_PATH = "/Users/Board/upload";
+    @Value("${custom.upload.path}")
+    private String UPLOAD_PATH;
 
     @ModelAttribute("tags")
     public List<Tag> tag(){
