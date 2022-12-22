@@ -1,6 +1,5 @@
 package com.project.board.domain.member.domain.searchInfo.searchCnt;
 
-import com.project.board.domain.board.domain.ENUM.Regions;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.project.board.domain.board.domain.ENUM.Regions.*;
+import static com.project.board.domain.board.domain.boardenum.Regions.*;
 import static com.project.board.domain.member.domain.searchInfo.SearchInfo.REGION;
 import static com.project.board.global.util.OrderUtils.order;
 
@@ -18,15 +17,15 @@ import static com.project.board.global.util.OrderUtils.order;
 @Embeddable
 @Data
 public class RegionsCnt implements AddCnt {
-    private int Seoul;
-    private int gyeonggiDo;
-    private int incheon;
-    private int gangwonDo;
-    private int jeollaBukDo;
-    private int jeollaNamDo;
-    private int gyeongsangBukDo;
-    private int gyeongsangNamDo;
-    private int jeju;
+    private int regionsOption1;
+    private int regionsOption2;
+    private int regionsOption3;
+    private int regionsOption4;
+    private int regionsOption5;
+    private int regionsOption6;
+    private int regionsOption7;
+    private int regionsOption8;
+    private int regionsOption9;
     @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
@@ -36,29 +35,29 @@ public class RegionsCnt implements AddCnt {
     }
 
     public void addCnt(String region) {
-        if(region.equals(SEOUL.toString())) Seoul++;
-        if(region.equals(GYEONGGI.toString())) gyeonggiDo++;
-        if(region.equals(INCHEON.toString())) incheon++;
-        if(region.equals(GANG.toString())) gangwonDo++;
-        if(region.equals(JN.toString())) jeollaBukDo++;
-        if(region.equals(JS.toString())) jeollaNamDo++;
-        if(region.equals(GS.toString())) gyeongsangBukDo++;
-        if(region.equals(GN.toString())) gyeongsangNamDo++;
-        if(region.equals(JEJU.toString())) jeju++;
+        if(region.equals(SEOUL.toString())) regionsOption1++;
+        if(region.equals(GYEONGGI.toString())) regionsOption2++;
+        if(region.equals(INCHEON.toString())) regionsOption3++;
+        if(region.equals(GANG.toString())) regionsOption4++;
+        if(region.equals(JN.toString())) regionsOption5++;
+        if(region.equals(JS.toString())) regionsOption6++;
+        if(region.equals(GS.toString())) regionsOption7++;
+        if(region.equals(GN.toString())) regionsOption8++;
+        if(region.equals(JEJU.toString())) regionsOption9++;
     }
 
     public int getScore(String region){
 
         String[] orders ={
-                Integer.toString(Seoul)+"Seoul"
-                ,Integer.toString(gyeonggiDo)+"gyeonggiDo"
-                ,Integer.toString(incheon)+"incheon"
-                ,Integer.toString(gangwonDo)+"gangwonDo"
-                ,Integer.toString(jeollaBukDo)+"jeollaBukDo"
-                ,Integer.toString(jeollaNamDo)+"jeollaNamDo"
-                ,Integer.toString(gyeongsangBukDo)+"gyeongsangBukDo"
-                ,Integer.toString(gyeongsangNamDo)+"gyeongsangNamDo"
-                ,Integer.toString(jeju)+"jeju"
+                Integer.toString(regionsOption1)+"regionsOption1"
+                ,Integer.toString(regionsOption2)+"regionsOption2"
+                ,Integer.toString(regionsOption3)+"regionsOption3"
+                ,Integer.toString(regionsOption4)+"regionsOption4"
+                ,Integer.toString(regionsOption5)+"regionsOption5"
+                ,Integer.toString(regionsOption6)+"regionsOption6"
+                ,Integer.toString(regionsOption7)+"regionsOption7"
+                ,Integer.toString(regionsOption8)+"regionsOption8"
+                ,Integer.toString(regionsOption9)+"regionsOption9"
                 ,"0"
         };
 
@@ -70,17 +69,17 @@ public class RegionsCnt implements AddCnt {
     }
 
     private Integer getScoreByGroupId(String region) {
-        if(region.equals(SEOUL.toString())) return orderMap.get("Seoul");
-        if(region.equals(GYEONGGI.toString())) return orderMap.get("gyeonggiDo");
-        if(region.equals(INCHEON.toString())) return orderMap.get("incheon");
-        if(region.equals(GANG.toString())) return orderMap.get("gangwonDo");
-        if(region.equals(JN.toString())) return orderMap.get("jeollaBukDo");
-        if(region.equals(JS.toString())) return orderMap.get("jeollaNamDo");
-        if(region.equals(GS.toString())) return orderMap.get("gyeongsangBukDo");
-        if(region.equals(GN.toString())) return orderMap.get("gyeongsangNamDo");
-        if(region.equals(JEJU.toString())) return orderMap.get("jeju");
+        if(region.equals(SEOUL.toString())) return orderMap.get("regionsOption1");
+        if(region.equals(GYEONGGI.toString())) return orderMap.get("regionsOption2");
+        if(region.equals(INCHEON.toString())) return orderMap.get("regionsOption3");
+        if(region.equals(GANG.toString())) return orderMap.get("regionsOption4");
+        if(region.equals(JN.toString())) return orderMap.get("regionsOption5");
+        if(region.equals(JS.toString())) return orderMap.get("regionsOption6");
+        if(region.equals(GS.toString())) return orderMap.get("regionsOption7");
+        if(region.equals(GN.toString())) return orderMap.get("regionsOption8");
+        if(region.equals(JEJU.toString())) return orderMap.get("regionsOption9");
 
-        throw new IllegalArgumentException("잘못된 groupId");
+        throw new IllegalArgumentException("잘못된 name");
     }
 
 }

@@ -17,11 +17,13 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final SearchInfoService searchInfoService;
+    //찜 기능 구현
     public void choiceBoard(Long boardId, Member member) {
         Member findMember = memberRepository.findByUsername(member.getUsername()).orElseThrow();
         findMember.choiceBoard(boardId);
     }
 
+    //정보를 수집
     public void collectInfo(Member member, ListParam listParam, BoardSearchCondition searchCondition) {
         Map<String, String> info = listParam.getInfo();
         Map<String, String> info1 = searchCondition.getInfo();

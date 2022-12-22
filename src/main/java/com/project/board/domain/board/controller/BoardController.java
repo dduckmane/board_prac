@@ -1,9 +1,10 @@
 package com.project.board.domain.board.controller;
 
+import com.project.board.domain.board.controller.init.BoardInit;
 import com.project.board.domain.board.controller.request.ListParam;
 import com.project.board.domain.board.domain.Address;
-import com.project.board.domain.board.domain.ENUM.Regions;
-import com.project.board.domain.board.domain.ENUM.Tag;
+import com.project.board.domain.board.domain.boardenum.Category;
+import com.project.board.domain.board.domain.boardenum.Tag;
 import com.project.board.domain.board.domain.UploadFile;
 import com.project.board.domain.board.dto.request.BoardDetailsDto;
 import com.project.board.domain.board.dto.request.BoardDto;
@@ -33,6 +34,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.project.board.domain.board.domain.boardenum.Category.*;
+import static com.project.board.domain.board.domain.boardenum.Tag.*;
+
 @Controller
 @RequestMapping("/user/board")
 @RequiredArgsConstructor
@@ -42,21 +46,17 @@ public class BoardController {
     private final BoardService boardService;
     private final QueryAdapterHandler adapterHandler;
     private final MemberService memberService;
-
+    private final BoardInit boardInit;
     private static final String UPLOAD_PATH = "/Users/Board/upload";
 
     @ModelAttribute("tags")
     public List<Tag> tag(){
-        List<Tag> tags=new ArrayList<>();
-
-        tags.add(Tag.PRICE);
-        tags.add(Tag.RESERVATION);
-        tags.add(Tag.MOOD);
-        tags.add(Tag.PLAY);
-
-        return tags;
+        return boardInit.getTags();
     }
-
+    @ModelAttribute("categories")
+    public List<Category> categories(){
+        return boardInit.getCategories();
+    }
 
     @GetMapping("/list")
     //제목으로 검색 추가
@@ -79,8 +79,10 @@ public class BoardController {
 
         List<BoardDto> content = result.getContent();
         model.addAttribute("BoardDtoList",content);
-        model.addAttribute("requestParam",listParam.getRequest());
         model.addAttribute("Param",listParam.getParam());
+        model.addAttribute("requestParam",listParam.getRequest());
+        model.addAttribute("title", listParam.getTitle(principalDetails.getMember()));
+
 
         PageMaker pageMaker = new PageMaker(
                 nowPage
@@ -104,8 +106,6 @@ public class BoardController {
         BoardDetailsDto boardDetailsDto = boardService
                 .findOne(boardId, response, request)
                 .map(BoardDetailsDto::new).orElseThrow();
-
-        boardDetailsDto.getTag().stream().forEach(s -> System.out.println("s = " + s));
 
         model.addAttribute("boardDetailsDto",boardDetailsDto);
 

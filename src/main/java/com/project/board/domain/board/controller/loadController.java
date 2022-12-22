@@ -1,4 +1,4 @@
-package com.project.board.domain.board;
+package com.project.board.domain.board.controller;
 
 
 import com.project.board.domain.board.domain.Board;

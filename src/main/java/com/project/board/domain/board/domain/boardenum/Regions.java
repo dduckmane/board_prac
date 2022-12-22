@@ -1,4 +1,4 @@
-package com.project.board.domain.board.domain.ENUM;
+package com.project.board.domain.board.domain.boardenum;
 
 import lombok.Getter;
 
@@ -12,7 +12,8 @@ public enum Regions {
     , JS("전라남도")
     , GS("경상 북도")
     , GN("경상 남도")
-    , JEJU("제주도");
+    , JEJU("제주도")
+    ;
 
     private final String description;
 

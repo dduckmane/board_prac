@@ -38,7 +38,10 @@
         <div class="container-xxl">
             <div class="row align-items-center">
                 <div class="col-md-9 welcome main-title">
-                    <h1 class="welcome-title fw-light">&nbsp 한식 페이지에 오신걸 환영합니다.</h1>
+
+                    <h1 class="welcome-title fw-light">
+                        &nbsp ${title} 페이지에 오신걸 환영합니다.
+                    </h1>
                 </div>
             </div>
         </div>

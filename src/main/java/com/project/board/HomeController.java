@@ -1,11 +1,9 @@
 package com.project.board;
 
-import com.project.board.domain.board.domain.ENUM.Regions;
+import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.board.dto.response.BestDto;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.searchInfo.searchCnt.CategoryCnt;
-import com.project.board.domain.member.domain.searchInfo.searchCnt.PriceCnt;
-import com.project.board.domain.member.domain.searchInfo.searchCnt.RegionsCnt;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
 import com.project.board.global.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -73,22 +71,7 @@ public class HomeController {
     {
         SearchInfo searchInfo = principalDetails.getMember().getSearchInfo();
         CategoryCnt category = searchInfo.getCategory();
-        System.out.println("category.getKorean() = " + category.getKorean());
-        System.out.println("category.getJapan() = " + category.getJapan());
-        System.out.println("category.getAmerica() = " + category.getAmerica());
-        System.out.println("category.getChina() = " + category.getChina());
 
-        PriceCnt priceCnt = searchInfo.getPriceCnt();
-        System.out.println("priceCnt.getOne = " + priceCnt.getOne());
-        System.out.println("priceCnt.getTwo = " + priceCnt.getTwo());
-        System.out.println("priceCnt.getThree = " + priceCnt.getThree());
-        System.out.println("priceCnt.getFour = " + priceCnt.getFour());
-
-        RegionsCnt regionsCnt = searchInfo.getRegionsCnt();
-        System.out.println("regionsCnt.getGangwonDo = " + regionsCnt.getGangwonDo());
-        System.out.println("regionsCnt.getSeoul = " + regionsCnt.getSeoul());
-        System.out.println("regionsCnt.getIncheon = " + regionsCnt.getIncheon());
-        System.out.println("regionsCnt.getGyeonggiDo = " + regionsCnt.getGyeonggiDo());
     }
 
 }

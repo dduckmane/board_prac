@@ -200,10 +200,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                 switch (order.getProperty()){
                     case "id":
                         return new OrderSpecifier(direction, board.id);
-                    case "titleASC":
-                        return new OrderSpecifier(Order.ASC, board.title);
-                    case "titleDESC":
-                        return new OrderSpecifier(Order.DESC, board.title);
                     case "createdDateASC":
                         return new OrderSpecifier(Order.ASC, board.createdDate);
                     case "createdDateDESC":
