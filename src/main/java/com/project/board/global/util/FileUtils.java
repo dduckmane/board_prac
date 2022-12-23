@@ -33,6 +33,12 @@ public class FileUtils {
         return null;
     }
 
+    public static void checkImage(String fileName) {
+        String fileExtension = getFileExtension(fileName);
+
+        if(!mediaMap.containsKey(fileExtension.toUpperCase())) throw new IllegalArgumentException("사진 파일이 아닙니다.");
+    }
+
 
 
     // 1. 사용자가 파일을 업로드했을 때 새로운 파일명을 생성해서
@@ -46,6 +52,7 @@ public class FileUtils {
      * @return - 업로드가 완료된 새로운 파일의 full path
      */
     public static String uploadFile(MultipartFile file, String uploadPath) {
+        checkImage(file.getOriginalFilename());
 
         // 중복이 없는 파일명으로 변경하기
         // ex) 상어.png -> 3dfsfjkdsfds-djksfaqwerij-dsjkfdkj_상어.png

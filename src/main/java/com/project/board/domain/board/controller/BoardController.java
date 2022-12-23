@@ -8,10 +8,10 @@ import com.project.board.domain.board.domain.boardenum.Category;
 import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.board.domain.boardenum.Tag;
 import com.project.board.domain.board.domain.UploadFile;
-import com.project.board.domain.board.dto.request.BoardDetailsDto;
-import com.project.board.domain.board.dto.request.BoardDto;
-import com.project.board.domain.board.dto.request.BoardSaveForm;
-import com.project.board.domain.board.dto.request.BoardUpdateForm;
+import com.project.board.domain.board.controller.request.BoardDetailsDto;
+import com.project.board.domain.board.controller.request.BoardDto;
+import com.project.board.domain.board.controller.request.BoardSaveForm;
+import com.project.board.domain.board.controller.request.BoardUpdateForm;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.search.BoardSearchCondition;
 import com.project.board.domain.board.service.BoardService;
@@ -29,17 +29,17 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.project.board.domain.board.domain.boardenum.Category.*;
-import static com.project.board.domain.board.domain.boardenum.Tag.*;
 
 @Controller
 @RequestMapping("/user/board")
@@ -132,13 +132,25 @@ public class BoardController {
     @PostMapping("/save/{groupId}")
     public String save(
             @AuthenticationPrincipal PrincipalDetails principalDetails
-            , @ModelAttribute BoardSaveForm boardSaveForm
+            , @Validated @ModelAttribute BoardSaveForm boardSaveForm
+            , BindingResult bindingResult
             , @PathVariable int groupId
     ){
-        log.info("/user/board/save POST");
+        UploadFile uploadFile = null;
+
+        try{
+            uploadFile=UploadFile.createUploadFile(boardSaveForm.getThumbNail(), UPLOAD_PATH);
+        }catch (IllegalArgumentException e){
+            bindingResult.addError(new FieldError("boardSaveForm","thumbNail", e.getMessage()));
+        }
+
+        if (bindingResult.hasErrors()){
+            System.out.println("bindingResult = " + bindingResult);
+            return "board/board-write";
+        }
+
         Member member = principalDetails.getMember();
 
-        UploadFile uploadFile = UploadFile.createUploadFile(boardSaveForm.getThumbNail(), UPLOAD_PATH);
         List<UploadFile> uploadFiles = UploadFile.storeFiles(boardSaveForm.getAttachFiles(), UPLOAD_PATH);
 
         boardService.save(

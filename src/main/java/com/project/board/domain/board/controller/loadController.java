@@ -44,7 +44,7 @@ public class loadController {
         String storeFileName = board.getThumbNail().getStoreFileName();
 
         String fileFullPath = FileUtils.fileFullPath(storeFileName, UPLOAD_PATH);
-        System.out.println("fileFullPath = " + fileFullPath);
+
         return new UrlResource("file:" + fileFullPath);
     }
     @GetMapping("/attach")
@@ -55,8 +55,6 @@ public class loadController {
         String fileFullPath = FileUtils.fileFullPath(boardFiles.getAttachFiles().getStoreFileName(), UPLOAD_PATH);
 
         UrlResource urlResource = new UrlResource("file:" + fileFullPath);
-
-        log.info("uploadFileName={}", boardFiles.getAttachFiles().getUploadFileName());
 
         String encodedUploadFileName = UriUtils.encode(boardFiles.getAttachFiles().getUploadFileName(), StandardCharsets.UTF_8);
 

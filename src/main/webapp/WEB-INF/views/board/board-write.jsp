@@ -1,16 +1,32 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <%@ include file="../include/static-head.jsp" %>
     <link rel="stylesheet" href="/css/boardWrite.css">
     <title>🍴Matjip</title>
+    <style>
+        .error {
+            color: #ef0505;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
 
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
+
+<spring:hasBindErrors name="boardSaveForm"/>
+<p id="errorTag" class="d-none"><form:errors path="boardSaveForm.tag"/></p>
+<p id="errorPhoto" class="d-none"><form:errors path="boardSaveForm.thumbNail"/></p>
+<p id="errorTitle" class="d-none"><form:errors path="boardSaveForm.title"/></p>
+<p id="errorRegion" class="d-none"><form:errors path="boardSaveForm.detailArea"/></p>
+<p id="errorFile" class="d-none"><form:errors path="boardSaveForm.attachFiles"/></p>
 
 <section id="top">
     <div class="section-content overlay d-flex justify-content-center align-items-center">
@@ -42,10 +58,11 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
-                <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input id="title" onkeyup="titleValidation()" type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
+            <p id="errorFieldTitle" class="pe-3 error" style="display:none;">제목은 최소 2글자이상 50글자 미만입니다.</p>
 
-            <div class="input-group mb-3">
+            <div class="input-group ">
 
                 <label class="input-group-text" for="inputGroupSelect04">대표 지역</label>
 
@@ -66,6 +83,7 @@
                 </c:forEach>
 
             </div>
+            <p class="explain ps-2 mb-3"> 태그는 최소 1개이상 선택해주세요</p>
 
             <div class="input-group">
                 <button type="button" class="btn btn-outline-secondary" style="color: black">가격 설정</button>
@@ -77,7 +95,7 @@
                 </ul>
                 <input id="value" name="price" type="text" class="form-control" aria-label="Text input with segmented dropdown button">
             </div>
-            <p class="explain"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
+            <p class="explain ps-2"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default2">상세 위치</span>
@@ -85,10 +103,11 @@
                 placeholder="주소로 검색 ex) 제주특별자치도 제주시 첨단로 242"
                 >
             </div>
-
+            <p id="errorFieldRegion" class="pe-3 error">상세 위치를 입력해주세요</p>
             <div id="map" class="mb-3" style="width:100%;height:350px;"></div>
 
             <textarea id="content" name="content"></textarea>
+
 
             <div class="mb-3">
                 <input class="form-control" type="file" multiple="multiple" id="formFileMultiple" name="attachFiles">
@@ -100,10 +119,9 @@
     </div>
     <input type="hidden" name="groupId" value="${groupId}">
 </form>
+<%--</spring:hasBindErrors>--%>
 
 <div style = "padding: 3rem 3rem;"></div>
-
-
 
 <!-- footer 시작 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
@@ -124,7 +142,15 @@
     let locationInfo=null;
 
     function printLocation()  {
+        let error = document.getElementById('errorFieldRegion');
+
         locationInfo = document.getElementById('location').value;
+
+        if(locationInfo.length>=1&&locationInfo.length<=3){
+            error.style.display='block'
+        }else {
+            error.style.display='none'
+        }
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
@@ -173,11 +199,42 @@
             output.value = this.value;
         }
     }
+    function titleValidation(){
+        let errorTitle = document.getElementById('errorFieldTitle');
+        errorTitle.style.display='block';
+
+        let title = document.getElementById('title').value.length;
+
+        if(title>1&&title<50) errorTitle.style.display='none';
+
+
+    }
+
+    function error(){
+        let errorTag = document.getElementById('errorTag').textContent;
+        let errorPhoto = document.getElementById('errorPhoto').textContent;
+        let errorTitle = document.getElementById('errorTitle').textContent;
+        let errorRegion = document.getElementById('errorRegion').textContent;
+        let errorFile = document.getElementById('errorFile').textContent;
+
+        let errors
+            = new Array(errorTag, errorPhoto, errorTitle, errorRegion, errorFile)
+            .filter(value => value!=='');
+        if(errors.length==0) return;
+        let errorMessage=errors[0];
+
+        for (let i = 1; i <errors.length ; i++) {
+            errorMessage+="\n"+errors[i];
+        }
+        alert(errorMessage);
+    }
+
 
     // 메인 실행부
     (function () {
         printLocation();
         slider();
+        error();
 
     })();
 </script>
