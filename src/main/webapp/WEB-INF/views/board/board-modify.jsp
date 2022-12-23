@@ -83,7 +83,7 @@
                 </c:forEach>
 
             </div>
-            <p class="explain ps-2 mb-3"> 태그는 최소 1개이상 선택해주세요</p>
+            <p class="explain ps-2 mb-3" style="color:#a9a166;"> 태그는 최소 1개이상 선택해주세요</p>
 
             <div class="input-group">
                 <button type="button" class="btn btn-outline-secondary" style="color: black">가격 설정</button>

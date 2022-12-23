@@ -233,7 +233,7 @@
                                 조회수: ${item.viewCnt}
                             </p>
                             <input type="checkbox" class="btn-check" name="options" id="${item.id}">
-                            <label class="btn btn-outline-danger p-0" for="${item.id}">😍</label>
+                            <label class="btn btn-outline-danger p-0 d-flex justify-content-center align-items-center" for="${item.id}">😍</label>
                         </div>
                     </div>
                 </div>
