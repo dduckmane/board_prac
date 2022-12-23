@@ -16,10 +16,10 @@ import static com.project.board.global.util.OrderUtils.order;
 @Embeddable
 @NoArgsConstructor
 public class CategoryCnt implements AddCnt {
-    private int korean;
-    private int japan;
-    private int china;
-    private int america;
+    private int categoryOption1;
+    private int categoryOption2;
+    private int categoryOption3;
+    private int categoryOption4;
     @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
@@ -30,19 +30,19 @@ public class CategoryCnt implements AddCnt {
     }
     @Override
     public void addCnt(String region){
-        if(region.equals("1")) korean++;
-        if(region.equals("2")) japan++;
-        if(region.equals("3")) china++;
-        if(region.equals("4")) america++;
+        if(region.equals("1")) categoryOption1++;
+        if(region.equals("2")) categoryOption2++;
+        if(region.equals("3")) categoryOption3++;
+        if(region.equals("4")) categoryOption4++;
     }
 
     public int getScore(int groupId){
 
         String[] orders ={
-                Integer.toString(korean)+"korean"
-                ,Integer.toString(japan)+"japan"
-                ,Integer.toString(china)+"china"
-                ,Integer.toString(america)+"america"
+                Integer.toString(categoryOption1)+"categoryOption1"
+                ,Integer.toString(categoryOption2)+"categoryOption2"
+                ,Integer.toString(categoryOption3)+"categoryOption3"
+                ,Integer.toString(categoryOption4)+"categoryOption4"
                 ,"0"
         };
 
@@ -53,10 +53,11 @@ public class CategoryCnt implements AddCnt {
     }
 
     private Integer getScoreByGroupId(int groupId) {
-        if(groupId ==1) return orderMap.get("korean");
-        if(groupId ==2) return orderMap.get("america");
-        if(groupId ==3) return orderMap.get("china");
-        if(groupId ==4) return orderMap.get("japan");
-        throw new IllegalArgumentException("잘못된 groupId");
+        if(groupId ==1) return orderMap.get("categoryOption1");
+        if(groupId ==2) return orderMap.get("categoryOption2");
+        if(groupId ==3) return orderMap.get("categoryOption3");
+        if(groupId ==4) return orderMap.get("categoryOption4");
+
+        throw new IllegalArgumentException("wrong option");
     }
 }

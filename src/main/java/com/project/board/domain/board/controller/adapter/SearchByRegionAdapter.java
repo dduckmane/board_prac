@@ -11,15 +11,16 @@ import org.springframework.data.domain.Pageable;
 public class SearchByRegionAdapter implements findQueryAdapter{
 
     private final BoardRepositoryImpl boardRepository;
+    private final String regionNames="SEOUL GYEONGGI INCHEON GANG JN JS GS GN JEJU";
 
     @Override
     public boolean supports(Object param) {
         if(!(param instanceof String)) return false;
-        String regions="Seoul gyeonggiDo incheon gangwonDo jeollaBukDo jeollaNamDo gyeongsangBukDo gyeongsangNamDo chungcheongDo";
+
+        String regions=regionNames;
         String region = (String) param;
 
         boolean contains = regions.contains(region);
-        System.out.println("contains = " + contains);
         return contains;
     }
 

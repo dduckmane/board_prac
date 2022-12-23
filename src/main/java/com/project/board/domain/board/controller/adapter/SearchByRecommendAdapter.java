@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.project.board.domain.board.boardConst.BoardConst.*;
+
 @RequiredArgsConstructor
 public class SearchByRecommendAdapter implements findQueryAdapter{
 
@@ -25,7 +27,7 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
         if(!(param instanceof String)) return false;
 
         String changeParam = (String) param;
-        return changeParam.equals("recommend");
+        return changeParam.equals(RECOMMEND);
     }
 
     @Override

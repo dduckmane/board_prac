@@ -1,23 +1,40 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <%@ include file="../include/static-head.jsp" %>
     <link rel="stylesheet" href="/css/boardWrite.css">
     <title>🍴Matjip</title>
+    <style>
+        .error {
+            color: #ef0505;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
 
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
 
+<spring:hasBindErrors name="boardSaveForm"/>
+<p id="errorTag" class="d-none"><form:errors path="boardSaveForm.tag"/></p>
+<p id="errorPhoto" class="d-none"><form:errors path="boardSaveForm.thumbNail"/></p>
+<p id="errorTitle" class="d-none"><form:errors path="boardSaveForm.title"/></p>
+<p id="errorRegion" class="d-none"><form:errors path="boardSaveForm.detailArea"/></p>
+
 <section id="top">
     <div class="section-content overlay d-flex justify-content-center align-items-center">
         <div class="container-xxl">
             <div class="row align-items-center">
-                <div class="col-md-9 welcome main-title">
-                    <h1 class="welcome-title fw-light">&nbsp 마음 껏 리뷰를 남겨 주세요</h1>
+                <div class="col welcome main-title">
+                    <p style="font-size: 2rem;" class="welcome-title fw-light">
+                        마음껏 리뷰를 남겨주세요
+                    </p>
                 </div>
             </div>
         </div>
@@ -40,40 +57,32 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
-                <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input id="title" onkeyup="titleValidation()" type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
+            <p id="errorFieldTitle" class="pe-3 error" style="display:none;">제목은 최소 2글자이상 50글자 미만입니다.</p>
 
-            <div class="input-group mb-3">
+            <div class="input-group ">
+
                 <label class="input-group-text" for="inputGroupSelect04">대표 지역</label>
+
                 <select class="form-select" name="representativeArea" id="inputGroupSelect04" aria-label="Example select with button addon">
-                    <option value="Seoul">서울</option>
-                    <option value="gyeonggiDo">경기</option>
-                    <option value="incheon">인천</option>
-                    <option value="gangwonDo">강원도</option>
-                    <option value="jeollaBukDo">전라북도</option>
-                    <option value="jeollaNamDo">전라남도</option>
-                    <option value="gyeongsangBukDo">경상북도</option>
-                    <option value="gyeongsangNamDo">경상남도</option>
-                    <option value="chungcheongDo">충청도</option>
+
+                    <c:forEach var="region" items="${regions}">
+                        <option value=${region}>${region.description}</option>
+                    </c:forEach>
+
                 </select>
 
                 <input type="radio" class="btn-check" name="options" id="option" disabled>
                 <label class="btn btn-outline-secondary" for="option">태그설정</label>
 
-                <input type="checkbox" class="btn-check" name="tag" value="atmosphere" id="option1">
-                <label class="btn btn-outline-secondary" for="option1">분위기</label>
-
-                <input type="checkbox" class="btn-check" name="tag" value="money" id="option2">
-                <label class="btn btn-outline-secondary" for="option2">가성비</label>
-
-                <input type="checkbox" class="btn-check" name="tag" value="reservation" id="option3">
-                <label class="btn btn-outline-secondary" for="option3">예약 가능</label>
-
-                <input type="checkbox" class="btn-check" name="tag" value="play" id="option4">
-                <label class="btn btn-outline-secondary" for="option4">놀기 좋은</label>
-
+                <c:forEach var="tag" varStatus="status" items="${tags}">
+                    <input type="checkbox" class="btn-check" name="tag" value=${tag} id=${status.index}>
+                    <label class="btn btn-outline-secondary" for=${status.index}>${tag.description}</label>
+                </c:forEach>
 
             </div>
+            <p class="explain ps-2 mb-3"> 태그는 최소 1개이상 선택해주세요</p>
 
             <div class="input-group">
                 <button type="button" class="btn btn-outline-secondary" style="color: black">가격 설정</button>
@@ -85,7 +94,7 @@
                 </ul>
                 <input id="value" name="price" type="text" class="form-control" aria-label="Text input with segmented dropdown button">
             </div>
-            <p class="explain"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
+            <p class="explain ps-2"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default2">상세 위치</span>
@@ -93,25 +102,19 @@
                 placeholder="주소로 검색 ex) 제주특별자치도 제주시 첨단로 242"
                 >
             </div>
-
+            <p id="errorFieldRegion" class="pe-3 error">상세 위치를 입력해주세요</p>
             <div id="map" class="mb-3" style="width:100%;height:350px;"></div>
 
             <textarea id="content" name="content"></textarea>
-
-            <div class="mb-3">
-                <input class="form-control" type="file" multiple="multiple" id="formFileMultiple" name="attachFiles">
-                <label for="formFileMultiple" class="form-label explain"> &nbsp * 첨부파일은 다중으로 선택 하실 수 있습니다.(단 한번에 올려야 합니다.) *</label>
-            </div>
 
             <button type="submit" class="btn btn-primary">글등록</button>
         </div>
     </div>
     <input type="hidden" name="groupId" value="${groupId}">
 </form>
+<%--</spring:hasBindErrors>--%>
 
 <div style = "padding: 3rem 3rem;"></div>
-
-
 
 <!-- footer 시작 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
@@ -132,7 +135,15 @@
     let locationInfo=null;
 
     function printLocation()  {
+        let error = document.getElementById('errorFieldRegion');
+
         locationInfo = document.getElementById('location').value;
+
+        if(locationInfo.length>=1&&locationInfo.length<=3){
+            error.style.display='block'
+        }else {
+            error.style.display='none'
+        }
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
@@ -181,11 +192,41 @@
             output.value = this.value;
         }
     }
+    function titleValidation(){
+        let errorTitle = document.getElementById('errorFieldTitle');
+        errorTitle.style.display='block';
+
+        let title = document.getElementById('title').value.length;
+
+        if(title>1&&title<50) errorTitle.style.display='none';
+
+
+    }
+
+    function error(){
+        let errorTag = document.getElementById('errorTag').textContent;
+        let errorPhoto = document.getElementById('errorPhoto').textContent;
+        let errorTitle = document.getElementById('errorTitle').textContent;
+        let errorRegion = document.getElementById('errorRegion').textContent;
+
+        let errors
+            = new Array(errorTag, errorPhoto, errorTitle, errorRegion)
+            .filter(value => value!=='');
+        if(errors.length==0) return;
+        let errorMessage=errors[0];
+
+        for (let i = 1; i <errors.length ; i++) {
+            errorMessage+="\n"+errors[i];
+        }
+        alert(errorMessage);
+    }
+
 
     // 메인 실행부
     (function () {
         printLocation();
         slider();
+        error();
 
     })();
 </script>

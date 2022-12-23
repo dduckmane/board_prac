@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import static com.project.board.domain.board.boardConst.BoardConst.*;
+
 @RequiredArgsConstructor
 public class SearchByChoiceAdapter implements findQueryAdapter{
 
@@ -17,7 +19,7 @@ public class SearchByChoiceAdapter implements findQueryAdapter{
         if(!(param instanceof String)) return false;
 
         String changeParam = (String) param;
-        return changeParam.equals("choice");
+        return changeParam.equals(CHOICE);
     }
 
     @Override

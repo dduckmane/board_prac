@@ -1,4 +1,4 @@
-package com.project.board.domain.board;
+package com.project.board.domain.board.controller;
 
 
 import com.project.board.domain.board.domain.Board;
@@ -8,6 +8,7 @@ import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.global.util.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -30,7 +31,8 @@ public class loadController {
 
     private final BoardFilesRepository boardFilesRepository;
 
-    private static final String UPLOAD_PATH = "C:\\sl_dev\\upload";
+    @Value("${custom.upload.path}")
+    private String UPLOAD_PATH;
     @ResponseBody
     @GetMapping(value ="/images", produces = MediaType.IMAGE_PNG_VALUE)
     public UrlResource downloadImage(@RequestParam Long itemId) throws
@@ -42,7 +44,7 @@ public class loadController {
         String storeFileName = board.getThumbNail().getStoreFileName();
 
         String fileFullPath = FileUtils.fileFullPath(storeFileName, UPLOAD_PATH);
-        System.out.println("fileFullPath = " + fileFullPath);
+
         return new UrlResource("file:" + fileFullPath);
     }
     @GetMapping("/attach")
@@ -53,8 +55,6 @@ public class loadController {
         String fileFullPath = FileUtils.fileFullPath(boardFiles.getAttachFiles().getStoreFileName(), UPLOAD_PATH);
 
         UrlResource urlResource = new UrlResource("file:" + fileFullPath);
-
-        log.info("uploadFileName={}", boardFiles.getAttachFiles().getUploadFileName());
 
         String encodedUploadFileName = UriUtils.encode(boardFiles.getAttachFiles().getUploadFileName(), StandardCharsets.UTF_8);
 
