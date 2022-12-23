@@ -40,21 +40,6 @@
                 <%--버튼 영역--%>
                 <%--첨부파일 버튼--%>
                 <div class="d-grid gap-2 d-flex justify-content-end">
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            첨부파일
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <c:forEach var="boardFilesDto" items="${boardDetailsDto.boardFilesDto}">
-                                <c:if test="${boardFilesDto.boardFilesId ne null}">
-                                    <li><a class="dropdown-item"
-                                           href="/attach?boardFilesId=${boardFilesDto.boardFilesId}">${boardFilesDto.uploadFileName}</a>
-                                    </li>
-                                </c:if>
-                            </c:forEach>
-                        </ul>
-                    </div>
                     <%--수정 버튼--%>
                     <c:if test="${checkMySelf}">
                         <a href="http://localhost:8080/user/board/edit/${boardDetailsDto.id}">
@@ -84,16 +69,16 @@
                                 <input type="radio" class="btn-check" name="options" id="option" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option">태그설정</label>
 
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'atmosphere')}" > checked</c:if> id="option1" disabled>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'MOOD')}" > checked</c:if> id="option1" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option1">분위기</label>
 
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'money')}" > checked</c:if> id="option2" disabled>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PLAY')}" > checked</c:if> id="option2" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option2">가성비</label>
 
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'reservation')}" > checked</c:if> id="option3" disabled>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'RESERVATION')}" > checked</c:if> id="option3" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option3">예약 가능</label>
 
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'play')}" > checked</c:if> id="option4" disabled>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PRICE')}" > checked</c:if> id="option4" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option4">놀기좋은</label>
                             </div>
                         </div>

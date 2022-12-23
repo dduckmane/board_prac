@@ -1,5 +1,6 @@
-package com.project.board.domain.board.controller.request;
+package com.project.board.domain.board.controller.response;
 
+import com.project.board.domain.board.dto.BoardFilesDto;
 import com.project.board.domain.board.domain.Board;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,7 +20,6 @@ public class BoardDetailsDto {
     private String username;
     private String createTime;
     private String detailArea;
-    private List<BoardFilesDto> boardFilesDto;
     private int price;
     private List<String> tag;
 
@@ -31,9 +31,7 @@ public class BoardDetailsDto {
         this.username = board.getMember().getUsername();
         this.createTime = board.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         this.detailArea = board.getAddress().getDetailArea();
-        this.boardFilesDto = board.getAttachFiles().stream().map(BoardFilesDto::new).collect(Collectors.toList());
         this.price=board.getPrice();
         this.tag=board.getTag();
-
     }
 }

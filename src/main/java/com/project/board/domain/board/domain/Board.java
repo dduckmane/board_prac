@@ -6,6 +6,7 @@ import com.project.board.domain.reply.domain.Reply;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,13 +40,27 @@ public class Board extends BaseEntity {
     private int price;
 
     private String tagSum;
-    //첨부파일
-    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<BoardFiles>attachFiles;
 
 
     public Board(String title){
         this.title=title;
+    }
+
+    public void update(
+            String title
+            , String content
+            , UploadFile thumbNail
+            , Address address
+            , int price
+            , String renewTag
+    ) {
+        this.title=title;
+        this.content=content;
+        this.address=address;
+        this.price=price;
+        this.tagSum=renewTag;
+
+        if(thumbNail!=null) this.thumbNail=thumbNail;
     }
 
     public List<String> getTag(){
@@ -69,7 +85,6 @@ public class Board extends BaseEntity {
             ,String content
             ,UploadFile thumbNail
             ,Address address
-            , List <BoardFiles> attachFiles
             , int price
             , String tag
     ){
@@ -86,13 +101,7 @@ public class Board extends BaseEntity {
 
         member.getBoards().add(board);
 
-        board.attachFiles=attachFiles;
-        attachFiles.stream().forEach(boardFiles -> boardFiles.addBoard(board));
-
         return board;
-    }
-    public void update(String content){
-        this.content=content;
     }
 
     public String substringTitle() {

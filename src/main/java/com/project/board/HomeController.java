@@ -2,7 +2,7 @@ package com.project.board;
 
 import com.project.board.domain.board.controller.init.BoardInit;
 import com.project.board.domain.board.domain.boardenum.Regions;
-import com.project.board.domain.board.dto.response.BestDto;
+import com.project.board.domain.board.controller.response.BestDto;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.searchInfo.searchCnt.CategoryCnt;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

@@ -8,8 +8,8 @@ import com.project.board.domain.board.domain.boardenum.Category;
 import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.board.domain.boardenum.Tag;
 import com.project.board.domain.board.domain.UploadFile;
-import com.project.board.domain.board.controller.request.BoardDetailsDto;
-import com.project.board.domain.board.controller.request.BoardDto;
+import com.project.board.domain.board.controller.response.BoardDetailsDto;
+import com.project.board.domain.board.controller.response.BoardDto;
 import com.project.board.domain.board.controller.request.BoardSaveForm;
 import com.project.board.domain.board.controller.request.BoardUpdateForm;
 import com.project.board.domain.board.repository.BoardRepository;
@@ -31,7 +31,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,15 +54,17 @@ public class BoardController {
     private String UPLOAD_PATH;
 
     @ModelAttribute("tags")
-    public List<Tag> tag(){
+    public List<Tag> tag() {
         return boardInit.getTags();
     }
+
     @ModelAttribute("categories")
-    public List<Category> categories(){
+    public List<Category> categories() {
         return boardInit.getCategories();
     }
+
     @ModelAttribute("regions")
-    public List<Regions> regions(){
+    public List<Regions> regions() {
         return boardInit.getRegions();
     }
 
@@ -75,21 +76,21 @@ public class BoardController {
             , BoardSearchCondition searchCondition
             , @PageableDefault(page = 0, size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
             , Model model
-    ){
+    ) {
         Page<BoardDto> result = adapterHandler
                 .service(listParam.getParam(), searchCondition, pageable)
                 .map(BoardDto::new);
 
-        memberService.collectInfo(principalDetails.getMember(),listParam,searchCondition);
+        memberService.collectInfo(principalDetails.getMember(), listParam, searchCondition);
 
         int nowPage = result.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, result.getTotalPages());
 
         List<BoardDto> content = result.getContent();
-        model.addAttribute("BoardDtoList",content);
-        model.addAttribute("Param",listParam.getParam());
-        model.addAttribute("requestParam",listParam.getRequest());
+        model.addAttribute("BoardDtoList", content);
+        model.addAttribute("Param", listParam.getParam());
+        model.addAttribute("requestParam", listParam.getRequest());
         model.addAttribute("title", listParam.getTitle(principalDetails.getMember()));
 
 
@@ -101,10 +102,11 @@ public class BoardController {
                 , result.isLast()
                 , result.getTotalPages());
 
-        model.addAttribute("pageMaker",pageMaker);
+        model.addAttribute("pageMaker", pageMaker);
 
         return "board/board-list";
     }
+
     @GetMapping("/{boardId}")
     public String board(
             @AuthenticationPrincipal PrincipalDetails principalDetails
@@ -112,7 +114,7 @@ public class BoardController {
             , HttpServletResponse response
             , HttpServletRequest request
             , Model model
-    ){
+    ) {
         Optional<Board> findBoard = boardService.findOne(boardId, response, request);
 
         BoardDetailsDto boardDetailsDto = findBoard.map(BoardDetailsDto::new).orElseThrow();
@@ -120,14 +122,16 @@ public class BoardController {
         boolean checkMyself = boardService.checkMyself(principalDetails.getMember(), findBoard.orElseThrow());
 
         model.addAttribute("checkMySelf", checkMyself);
-        model.addAttribute("boardDetailsDto",boardDetailsDto);
+        model.addAttribute("boardDetailsDto", boardDetailsDto);
 
         return "board/board-detail";
     }
+
     @GetMapping("/save/{groupId}")
-    public String saveForm(@PathVariable int groupId,Model model){
-        model.addAttribute("groupId",groupId);
-        return "board/board-write";}
+    public String saveForm(@PathVariable int groupId, Model model) {
+        model.addAttribute("groupId", groupId);
+        return "board/board-write";
+    }
 
     @PostMapping("/save/{groupId}")
     public String save(
@@ -135,23 +139,21 @@ public class BoardController {
             , @Validated @ModelAttribute BoardSaveForm boardSaveForm
             , BindingResult bindingResult
             , @PathVariable int groupId
-    ){
+    ) {
         UploadFile uploadFile = null;
 
-        try{
-            uploadFile=UploadFile.createUploadFile(boardSaveForm.getThumbNail(), UPLOAD_PATH);
-        }catch (IllegalArgumentException e){
-            bindingResult.addError(new FieldError("boardSaveForm","thumbNail", e.getMessage()));
+        try {
+            uploadFile = UploadFile.createUploadFile(boardSaveForm.getThumbNail(), UPLOAD_PATH);
+        } catch (IllegalArgumentException e) {
+            bindingResult.addError(new FieldError("boardSaveForm", "thumbNail", e.getMessage()));
         }
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             System.out.println("bindingResult = " + bindingResult);
             return "board/board-write";
         }
 
         Member member = principalDetails.getMember();
-
-        List<UploadFile> uploadFiles = UploadFile.storeFiles(boardSaveForm.getAttachFiles(), UPLOAD_PATH);
 
         boardService.save(
                 member
@@ -161,33 +163,81 @@ public class BoardController {
                 , uploadFile
                 , new Address(
                         boardSaveForm.getRepresentativeArea()
-                        ,boardSaveForm.getDetailArea())
-                , uploadFiles
+                        , boardSaveForm.getDetailArea())
                 , boardSaveForm.getPrice()
                 , boardSaveForm.getTag()
         );
         return "redirect:/user/board/list?groupId={groupId}";
     }
+
     @GetMapping("/edit/{boardId}")
-    public String editForm(@PathVariable Long boardId,Model model) {
-        BoardUpdateForm BoardUpdateForm = boardRepository.findById(boardId).map(BoardUpdateForm::new).orElseGet(() -> new BoardUpdateForm());
-        model.addAttribute("BoardUpdateForm",BoardUpdateForm);
+    public String editForm(@PathVariable Long boardId, Model model) {
+        BoardUpdateForm boardUpdateForm = boardRepository.findById(boardId).map(BoardUpdateForm::new).orElseThrow();
+
+        model.addAttribute("boardUpdateForm", boardUpdateForm);
         return "board/board-modify";
     }
-    @PostMapping("/edit/{boardId}")
-    public String edit(@AuthenticationPrincipal PrincipalDetails principalDetails,@RequestParam Long boardId,@ModelAttribute BoardUpdateForm boardUpdateForm,RedirectAttributes redirectAttributes){
 
-        boardRepository.findMemberById(boardId).orElseThrow().checkMySelf(principalDetails.getUsername());
+    @PostMapping("/edit")
+    public String edit(
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+            , @Validated @ModelAttribute BoardUpdateForm boardUpdateForm
+            , BindingResult bindingResult
+            , RedirectAttributes redirectAttributes
+    ) {
+        boardRepository.findMemberById(boardUpdateForm.getId()).orElseThrow().checkMySelf(principalDetails.getUsername());
 
+        UploadFile uploadFile = null;
+        if(boardUpdateForm.getThumbNail().getSize()!=0){
+            try {
+                uploadFile = UploadFile.createUploadFile(boardUpdateForm.getThumbNail(), UPLOAD_PATH);
+            } catch (IllegalArgumentException e) {
+                bindingResult.addError(new FieldError("boardUpdateForm", "thumbNail", e.getMessage()));
+            }
+        }
+        if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult);
+            return "board/board-modify";
+        }
 
-        boardService.update(boardId,boardUpdateForm.getContent());
+        boardService.update(
+                boardUpdateForm.getId()
+                , boardUpdateForm.getTitle()
+                , boardUpdateForm.getContent()
+                , uploadFile
+                , new Address(
+                        boardUpdateForm.getRepresentativeArea()
+                        , boardUpdateForm.getDetailArea())
+                , boardUpdateForm.getPrice()
+                , boardUpdateForm.getTag()
+        );
+        redirectAttributes.addAttribute("boardId",boardUpdateForm.getId());
         return "redirect:/user/board/{boardId}";
     }
+
     @GetMapping("/delete/{boardId}")
     //물어보기 외래키 제약조건??
-    public String delete(@PathVariable Long boardId,RedirectAttributes redirectAttributes){
+    public String delete(@PathVariable Long boardId) {
         boardService.delete(boardId);
         return "redirect:/";
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

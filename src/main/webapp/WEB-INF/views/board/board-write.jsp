@@ -26,7 +26,6 @@
 <p id="errorPhoto" class="d-none"><form:errors path="boardSaveForm.thumbNail"/></p>
 <p id="errorTitle" class="d-none"><form:errors path="boardSaveForm.title"/></p>
 <p id="errorRegion" class="d-none"><form:errors path="boardSaveForm.detailArea"/></p>
-<p id="errorFile" class="d-none"><form:errors path="boardSaveForm.attachFiles"/></p>
 
 <section id="top">
     <div class="section-content overlay d-flex justify-content-center align-items-center">
@@ -107,12 +106,6 @@
             <div id="map" class="mb-3" style="width:100%;height:350px;"></div>
 
             <textarea id="content" name="content"></textarea>
-
-
-            <div class="mb-3">
-                <input class="form-control" type="file" multiple="multiple" id="formFileMultiple" name="attachFiles">
-                <label for="formFileMultiple" class="form-label explain"> &nbsp * 첨부파일은 다중으로 선택 하실 수 있습니다.(단 한번에 올려야 합니다.) *</label>
-            </div>
 
             <button type="submit" class="btn btn-primary">글등록</button>
         </div>
@@ -215,10 +208,9 @@
         let errorPhoto = document.getElementById('errorPhoto').textContent;
         let errorTitle = document.getElementById('errorTitle').textContent;
         let errorRegion = document.getElementById('errorRegion').textContent;
-        let errorFile = document.getElementById('errorFile').textContent;
 
         let errors
-            = new Array(errorTag, errorPhoto, errorTitle, errorRegion, errorFile)
+            = new Array(errorTag, errorPhoto, errorTitle, errorRegion)
             .filter(value => value!=='');
         if(errors.length==0) return;
         let errorMessage=errors[0];

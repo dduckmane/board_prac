@@ -29,5 +29,4 @@ public class BoardSaveForm {
     @NotNull
     private int price;
     private String content;
-    private List <MultipartFile> attachFiles;
 }

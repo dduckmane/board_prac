@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.project.board.domain.board.domain.boardenum.Regions.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +45,15 @@ public class ListParam {
     public String getName(Member member){
         if(param.equals("choice")) return member.getName()+" 님의 찜 목록";
         if (param.equals("recommend")) return member.getName()+" 님의 전용 맞춤";
+        if (param.equals(SEOUL.toString())) return SEOUL.getDescription();
+        if (param.equals(GYEONGGI.toString())) return GYEONGGI.getDescription();
+        if (param.equals(INCHEON.toString())) return INCHEON.getDescription();
+        if (param.equals(GANG.toString())) return GANG.getDescription();
+        if (param.equals(JN.toString())) return JN.getDescription();
+        if (param.equals(JS.toString())) return JS.getDescription();
+        if (param.equals(GS.toString())) return GS.getDescription();
+        if (param.equals(GN.toString())) return GN.getDescription();
+        if (param.equals(JEJU.toString())) return JEJU.getDescription();
 
         throw new IllegalArgumentException();
     }

@@ -1,5 +1,6 @@
 package com.project.board.domain.board.service;
 
+import com.project.board.domain.board.controller.request.BoardUpdateForm;
 import com.project.board.domain.board.domain.Address;
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.domain.BoardFiles;
@@ -35,25 +36,45 @@ public class BoardService {
             , String content
             , UploadFile thumbNail
             , Address address
-            , List<UploadFile>uploadFiles
             , int price
             , List<String> tag
-
     ){
-        List<BoardFiles> attachFiles = uploadFiles.stream().map(BoardFiles::new).collect(Collectors.toList());
-
         String renewTag="";
         for (String tagName : tag) { renewTag+=","+tagName;}
 
-        Board saveBoard = Board.write(member, groupId, title, content,thumbNail,address,attachFiles,price,renewTag);
+        Board saveBoard = Board.write(
+                member
+                , groupId
+                , title
+                , content
+                , thumbNail
+                , address
+                , price
+                , renewTag
+        );
         boardRepository.save(saveBoard);
     }
 
     @Transactional
-    public void update(Long boardId, String content) {
+    public void update(
+            Long boardId
+            , String title
+            , String content
+            , UploadFile thumbNail
+            , Address address
+            , int price
+            , List<String> tag
+
+    ){
         Board board = boardRepository.findById(boardId).orElseThrow();
-        board.update(content);
+
+        String renewTag="";
+        for (String tagName : tag) { renewTag+=","+tagName;}
+
+        board.update(title, content,thumbNail,address,price,renewTag);
     }
+
+
     @Transactional
     public void delete(Long boardId){
         Board board = boardRepository.findById(boardId).orElseThrow();

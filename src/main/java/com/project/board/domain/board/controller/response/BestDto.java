@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 @Data
 @NoArgsConstructor
 public class BestDto {
+    private static final String UPLOAD_PATH = "C:\\sl_dev\\upload";
     private String name;
     private Long viewCnt;
     private Long itemId;

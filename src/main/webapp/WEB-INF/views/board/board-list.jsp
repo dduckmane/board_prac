@@ -11,6 +11,9 @@
 </head>
 <style>
     .btn {
+        height: 2.4rem;
+    }
+    .btn {
         font-size: 1rem;
     }
     #content {
@@ -68,7 +71,7 @@
 
 <%--filter 영역--%>
 <section id="filterList">
-    <div class="d-flex container-fluid mt-2">
+    <div class="d-flex container-fluid mt-2 pe-0">
         <div class="dropdown">
             <%--대표 필터 버튼--%>
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -205,7 +208,7 @@
                     </div>
                 </c:otherwise>
             </c:choose>
-            <a class="btn btn-outline-success navbar-brand" href="/user/board/list?${requestParam}=${Param}">필터 초기화</a>
+            <a class="m-0 btn btn-outline-success navbar-brand" href="/user/board/list?${requestParam}=${Param}">필터 초기화</a>
         </div>
 
     </div>
