@@ -59,7 +59,7 @@ spring:
           kakao:
             client-id: fa3a945946b115e5706faa5317e23786
             client-secret: jU7yRoeWOe9I6jQ8nEHXwd7DQsZNZJpX
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://ec2-43-201-132-89.ap-northeast-2.compute.amazonaws.com/login/oauth2/code/kakao
             client-name: kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST
@@ -84,9 +84,9 @@ logging.level:
 #  org.hibernate.type: trace
 custom:
   upload:
-    path: "/Users/Board/upload"
+    path: "/usr/local/upload"
   ckeditor:
-    path: "/Users/Board/Pictures/CKPictures/"
+    path: "/usr/local/ckEditor"
 server:
   servlet:
     session:
