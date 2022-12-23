@@ -42,10 +42,10 @@
                 <div class="d-grid gap-2 d-flex justify-content-end">
                     <%--수정 버튼--%>
                     <c:if test="${checkMySelf}">
-                        <a href="http://localhost:8080/user/board/edit/${boardDetailsDto.id}">
+                        <a href="/user/board/edit/${boardDetailsDto.id}">
                             <button class="btn btn-primary" type="button">수정</button>
                         </a>
-                        <a href="http://localhost:8080/user/board/delete/${boardDetailsDto.id}">
+                        <a href="/user/board/delete/${boardDetailsDto.id}">
                             <button class="btn btn-primary" type="button">삭제</button>
                         </a>
                     </c:if>
