@@ -56,12 +56,6 @@
                     </a>
                 </div>
 
-                <div class="col-12 d-flex justify-content-center align-items-center">
-                    <a href="/oauth2/authorization/facebook">
-                        <img height="80px" width="350px" src="https://scontent-ssn1-1.xx.fbcdn.net/v/t39.2365-6/294967112_614766366879300_4791806768823542705_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ad8a9d&_nc_ohc=tWdI3DiNAqEAX_E-ups&_nc_ht=scontent-ssn1-1.xx&oh=00_AfCvYLc-T09wTMM3UNJ7m6SOfARrwhprVKpwN_BuUfc7HA&oe=63A3F464"/>
-                    </a>
-                </div>
-
                 <div id="naver" class="col-12 d-flex justify-content-center align-items-center">
                     <a href="/oauth2/authorization/naver" class="h-100 w-100">
                     </a>

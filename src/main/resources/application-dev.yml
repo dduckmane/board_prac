@@ -37,12 +37,6 @@ spring:
             scope:
               - email
               - profile
-          facebook:
-            client-id: 675409300721029
-            client-secret: 68dc133e845f394ae005d027a4d3204b
-            scope:
-              - email
-              - public_profile
 
           naver:
             client-id: 2c7HTfLlILn5eHzKR2_3
