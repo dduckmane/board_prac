@@ -106,6 +106,9 @@ public class Board extends BaseEntity {
             return title;
         }
     }
+    public boolean checkMySelf(String username){
+        return member.getUsername().equals(username);
+    }
     public Boolean checkNewArticle() {
         LocalDateTime newArticleDate = this.getCreatedDate().plusMinutes(5);
         return LocalDateTime.now().isBefore(newArticleDate);

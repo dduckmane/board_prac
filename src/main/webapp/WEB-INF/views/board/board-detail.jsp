@@ -39,7 +39,7 @@
             <div class="text-area">
                 <%--버튼 영역--%>
                 <%--첨부파일 버튼--%>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div class="d-grid gap-2 d-flex justify-content-end">
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,37 +56,49 @@
                         </ul>
                     </div>
                     <%--수정 버튼--%>
-                    <a href="http://localhost:8080/user/board/edit/${boardDetailsDto.id}">
-                        <button class="btn btn-primary" type="button">수정</button>
-                    </a>
-                    <a href="http://localhost:8080/user/board/delete/${boardDetailsDto.id}">
-                        <button class="btn btn-primary" type="button">삭제</button>
-                    </a>
+                    <c:if test="${checkMySelf}">
+                        <a href="http://localhost:8080/user/board/edit/${boardDetailsDto.id}">
+                            <button class="btn btn-primary" type="button">수정</button>
+                        </a>
+                        <a href="http://localhost:8080/user/board/delete/${boardDetailsDto.id}">
+                            <button class="btn btn-primary" type="button">삭제</button>
+                        </a>
+                    </c:if>
                 </div>
+
                     <div class="input-group my-3">
                         <span class="input-group-text" id="inputGroup-sizing-default1">제목</span>
                         <input type="text" value="${boardDetailsDto.title}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default1" disabled>
                     </div>
 
-                    <div class="input-group ">
-                        <span class="input-group-text" id="inputGroup-sizing-default2">가격</span>
-                        <input type="text" value="${boardDetailsDto.price}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" disabled>
+                    <div class="row">
+                        <div class="col-md-6 pe-0">
+                            <div class="input-group">
+                                <span class="input-group-text" id="inputGroup-sizing-default2">가격</span>
+                                <input type="text" value="${boardDetailsDto.price}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 p-0 mt-md-0 mt-3">
 
-                        <input type="radio" class="btn-check" name="options" id="option" disabled>
-                        <label class="btn btn-outline-secondary" for="option">태그설정</label>
+                            <div class="input-group">
+                                <input type="radio" class="btn-check" name="options" id="option" disabled>
+                                <label class="btn btn-outline-secondary w-20" for="option">태그설정</label>
 
-                        <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'atmosphere')}" > checked</c:if> id="option1" disabled>
-                        <label class="btn btn-outline-secondary" for="option1">분위기</label>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'atmosphere')}" > checked</c:if> id="option1" disabled>
+                                <label class="btn btn-outline-secondary w-20" for="option1">분위기</label>
 
-                        <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'money')}" > checked</c:if> id="option2" disabled>
-                        <label class="btn btn-outline-secondary" for="option2">가성비</label>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'money')}" > checked</c:if> id="option2" disabled>
+                                <label class="btn btn-outline-secondary w-20" for="option2">가성비</label>
 
-                        <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'reservation')}" > checked</c:if> id="option3" disabled>
-                        <label class="btn btn-outline-secondary" for="option3">예약 가능</label>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'reservation')}" > checked</c:if> id="option3" disabled>
+                                <label class="btn btn-outline-secondary w-20" for="option3">예약 가능</label>
 
-                        <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'play')}" > checked</c:if> id="option4" disabled>
-                        <label class="btn btn-outline-secondary" for="option4">놀기 좋은</label>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'play')}" > checked</c:if> id="option4" disabled>
+                                <label class="btn btn-outline-secondary w-20" for="option4">놀기좋은</label>
+                            </div>
+                        </div>
                     </div>
+
                     <%--위치 버튼--%>
                         <div class="input-group mt-3">
                             <span class="input-group-text" id="inputGroup-sizing-default3">위치</span>

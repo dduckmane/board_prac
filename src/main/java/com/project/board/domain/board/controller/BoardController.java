@@ -3,6 +3,7 @@ package com.project.board.domain.board.controller;
 import com.project.board.domain.board.controller.init.BoardInit;
 import com.project.board.domain.board.controller.request.ListParam;
 import com.project.board.domain.board.domain.Address;
+import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.domain.boardenum.Category;
 import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.board.domain.boardenum.Tag;
@@ -35,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.project.board.domain.board.domain.boardenum.Category.*;
 import static com.project.board.domain.board.domain.boardenum.Tag.*;
@@ -105,15 +107,19 @@ public class BoardController {
     }
     @GetMapping("/{boardId}")
     public String board(
-            @PathVariable Long boardId
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+            , @PathVariable Long boardId
             , HttpServletResponse response
             , HttpServletRequest request
-            ,Model model
+            , Model model
     ){
-        BoardDetailsDto boardDetailsDto = boardService
-                .findOne(boardId, response, request)
-                .map(BoardDetailsDto::new).orElseThrow();
+        Optional<Board> findBoard = boardService.findOne(boardId, response, request);
 
+        BoardDetailsDto boardDetailsDto = findBoard.map(BoardDetailsDto::new).orElseThrow();
+
+        boolean checkMyself = boardService.checkMyself(principalDetails.getMember(), findBoard.orElseThrow());
+
+        model.addAttribute("checkMySelf", checkMyself);
         model.addAttribute("boardDetailsDto",boardDetailsDto);
 
         return "board/board-detail";
@@ -151,17 +157,17 @@ public class BoardController {
         return "redirect:/user/board/list?groupId={groupId}";
     }
     @GetMapping("/edit/{boardId}")
-    public String editForm(@PathVariable Long boardId,Model model)
-
-    {
+    public String editForm(@PathVariable Long boardId,Model model) {
         BoardUpdateForm BoardUpdateForm = boardRepository.findById(boardId).map(BoardUpdateForm::new).orElseGet(() -> new BoardUpdateForm());
         model.addAttribute("BoardUpdateForm",BoardUpdateForm);
         return "board/board-modify";
     }
     @PostMapping("/edit/{boardId}")
     public String edit(@AuthenticationPrincipal PrincipalDetails principalDetails,@RequestParam Long boardId,@ModelAttribute BoardUpdateForm boardUpdateForm,RedirectAttributes redirectAttributes){
-        //들어온 사람이 boardId를 작성하기 않았으면 돌려보내줘야하는 코드를 서버에서도 알려줘야하고
-        //클라이언트로도 true와 false를 넘겨줘야한다.
+
+        boardRepository.findMemberById(boardId).orElseThrow().checkMySelf(principalDetails.getUsername());
+
+
         boardService.update(boardId,boardUpdateForm.getContent());
         return "redirect:/user/board/{boardId}";
     }

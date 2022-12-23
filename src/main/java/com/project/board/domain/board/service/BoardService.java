@@ -15,6 +15,7 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.MetaMessage;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,10 +61,14 @@ public class BoardService {
     }
     @Transactional
     public Optional<Board> findOne(Long boardId, HttpServletResponse response, HttpServletRequest request){
-        Board board = boardRepository.findById(boardId).orElseThrow();
+        Board board = boardRepository.findMemberById(boardId).orElseThrow();
 
         makeViewCount(board,response,request);
         return Optional.ofNullable(board);
+    }
+
+    public boolean checkMyself(Member member, Board board){
+        return board.checkMySelf(member.getUsername());
     }
 
     private void makeViewCount(Board board, HttpServletResponse response, HttpServletRequest request) {
@@ -77,4 +82,5 @@ public class BoardService {
             response.addCookie(cookie);
         }
     }
+
 }
