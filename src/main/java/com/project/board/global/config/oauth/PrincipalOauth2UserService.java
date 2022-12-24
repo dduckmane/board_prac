@@ -62,9 +62,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String role="ROLE_USER";
         String name=oauth2UserInfo.getName();
 
-        Member member = memberRepository.findByUsername(username).orElseGet(()->new Member("optional"));
+        Member member = memberRepository.findByUsername(username).orElse(null);
 
-        if(member.getId()==null){
+        if(member==null){
             member = Member.builder()
                     .username(username)
                     .password(password)

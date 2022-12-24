@@ -69,10 +69,6 @@ public class Board extends BaseEntity {
         }
         return new ArrayList<>();
     }
-    public void setMember(Member member) {
-        this.member = member;
-        member.getBoards().add(this);
-    }
 
     public void setReplies(Reply reply) {
         replies.add(reply);
@@ -98,8 +94,6 @@ public class Board extends BaseEntity {
         board.address=address;
         board.price=price;
         board.tagSum=tag;
-
-        member.getBoards().add(board);
 
         return board;
     }
