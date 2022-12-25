@@ -128,8 +128,13 @@ public class BoardController {
     }
 
     @GetMapping("/save/{groupId}")
-    public String saveForm(@PathVariable int groupId, Model model) {
+    public String saveForm(
+            @PathVariable int groupId
+            , @ModelAttribute BoardSaveForm boardSaveForm
+            , Model model
+    ) {
         model.addAttribute("groupId", groupId);
+
         return "board/board-write";
     }
 
@@ -153,10 +158,8 @@ public class BoardController {
             return "board/board-write";
         }
 
-        Member member = principalDetails.getMember();
-
         boardService.save(
-                member
+                principalDetails.getMember()
                 , groupId
                 , boardSaveForm.getTitle()
                 , boardSaveForm.getContent()

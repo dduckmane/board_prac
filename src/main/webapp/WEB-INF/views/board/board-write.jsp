@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -57,7 +58,7 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
-                <input id="title" onkeyup="titleValidation()" type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input id="title" onkeyup="titleValidation()" type="text" name="title" value="${boardSaveForm.title}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <p id="errorFieldTitle" class="pe-3 error" style="display:none;">제목은 최소 2글자이상 50글자 미만입니다.</p>
 
@@ -65,10 +66,11 @@
 
                 <label class="input-group-text" for="inputGroupSelect04">대표 지역</label>
 
+                <input type="hidden" id="region" value="${boardSaveForm.representativeArea}">
                 <select class="form-select" name="representativeArea" id="inputGroupSelect04" aria-label="Example select with button addon">
 
                     <c:forEach var="region" items="${regions}">
-                        <option value=${region}>${region.description}</option>
+                        <option id="${region}" value=${region}>${region.description}</option>
                     </c:forEach>
 
                 </select>
@@ -77,9 +79,11 @@
                 <label class="btn btn-outline-secondary" for="option">태그설정</label>
 
                 <c:forEach var="tag" varStatus="status" items="${tags}">
-                    <input type="checkbox" class="btn-check" name="tag" value=${tag} id=${status.index}>
+                    <input type="checkbox" class="btn-check" name="tag" value=${tag} <c:if test="${fn:contains(boardSaveForm.tag,tag)}">checked</c:if> id=${status.index}>
                     <label class="btn btn-outline-secondary" for=${status.index}>${tag.description}</label>
                 </c:forEach>
+
+
 
             </div>
             <p class="explain ps-2 mb-3"> 태그는 최소 1개이상 선택해주세요</p>
@@ -90,7 +94,7 @@
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <input type="range" min="0" max="100000" step="1000" class="slider" id="myRange">
+                    <input type="range" value="${boardSaveForm.price}" min="0" max="100000" step="1000" class="slider" id="myRange">
                 </ul>
                 <input id="value" name="price" type="text" class="form-control" aria-label="Text input with segmented dropdown button">
             </div>
@@ -98,14 +102,14 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default2">상세 위치</span>
-                <input id="location" onkeyup='printLocation()' type="text" name="detailArea" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"
+                <input id="location" value="${boardSaveForm.detailArea}" onkeyup='printLocation()' type="text" name="detailArea" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"
                 placeholder="주소로 검색 ex) 제주특별자치도 제주시 첨단로 242"
                 >
             </div>
             <p id="errorFieldRegion" class="pe-3 error">상세 위치를 입력해주세요</p>
             <div id="map" class="mb-3" style="width:100%;height:350px;"></div>
 
-            <textarea id="content" name="content"></textarea>
+            <textarea id="content" name="content">${boardSaveForm.content}</textarea>
 
             <button type="submit" class="btn btn-primary">글등록</button>
         </div>
@@ -220,6 +224,12 @@
         }
         alert(errorMessage);
     }
+    function checkRegion(){
+        let region = document.getElementById('region');
+        let regionTag = document.getElementById(region.value);
+
+        regionTag.selected=true;
+    }
 
 
     // 메인 실행부
@@ -227,6 +237,8 @@
         printLocation();
         slider();
         error();
+        checkRegion();
+
 
     })();
 </script>
