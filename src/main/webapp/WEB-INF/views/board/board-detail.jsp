@@ -46,7 +46,7 @@
                             <button class="btn btn-primary" type="button">수정</button>
                         </a>
                         <a href="/user/board/delete/${boardDetailsDto.id}">
-                            <button class="btn btn-primary" type="button">삭제</button>
+                            <button id="delete" class="btn btn-primary" type="button">삭제</button>
                         </a>
                     </c:if>
                 </div>
@@ -481,6 +481,7 @@
                     });
             };
     }
+
 
     // 메인 실행부
     (function () {
