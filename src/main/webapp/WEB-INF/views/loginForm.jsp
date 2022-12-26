@@ -13,6 +13,11 @@
             width: 330px;
             height: 65px;
         }
+        .divider {
+            width: 20%;
+            margin: 10px 1rem 7rem;
+            border-top: 0.5rem solid rgb(176, 255, 189);
+        }
     </style>
 </head>
 
@@ -40,25 +45,30 @@
     <div class="section-content overlay d-flex justify-content-center align-items-center">
         <div class="container-xl">
             <div class="row d-flex justify-content-center align-items-center">
-                <div class="text-center py-10">
-                    <h3>저희 Matjip 에 와주셔서 감사합니다.</h3>
-                    <h3>버튼을 눌러 1초 회원가입 로그인을 진행하세요</h3>
+                <div class="text-center py-10 font-monospace">
+                    <h3 class="font-monospace fst-italic">회원가입/로그인</h3>
                 </div>
+
+                <div class="divider"></div>
+
                 <div class="col-12 d-flex justify-content-center align-items-center py-2">
                     <a href="/oauth2/authorization/kakao">
-                        <img height="70px" width="350px" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"/>
+                        <img height="70px" width="338px" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"/>
                     </a>
                 </div>
 
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <a href="/oauth2/authorization/google">
-                        <img height="80px" width="350px" src="https://developers.google.com/static/identity/images/btn_google_signin_light_normal_web.png?hl=ko"/>
+                        <img height="70px" width="340px" src="https://developers.google.com/static/identity/images/btn_google_signin_light_normal_web.png?hl=ko"/>
                     </a>
                 </div>
 
                 <div id="naver" class="col-12 d-flex justify-content-center align-items-center">
-                    <a href="/oauth2/authorization/naver" class="h-100 w-100">
+                    <a href="/oauth2/authorization/naver" class="h-90 w-100">
                     </a>
+                </div>
+                <div class="text-center py-10 font-monospace">
+                    <h6 class="mt-3 font-monospace fst-italic" style="color:#858282;">1초 회원가입하고 바로 로그인하세요</h6>
                 </div>
 
             </div>

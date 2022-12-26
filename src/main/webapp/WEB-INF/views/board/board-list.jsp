@@ -49,7 +49,6 @@
         }
     }
 
-
 </style>
 <body>
 
@@ -225,7 +224,7 @@
                 <div class="col-md">
                     <div class="card mb-3 p-0">
                         <a href="/user/board/${item.id}">
-                            <img id="image" data-item-id="${item.id}" class="card-img card-img-left img-fluid w-100 h-100" style="object-fit: cover" src="" alt="Card image" >
+                            <img id="image" data-item-id="${item.id}" class="card-img card-img-left img-fluid img-thumbnail" src="" alt="Card image" >
                         </a>
                         <div class="card-body p-1 m-0 d-flex flex-column justify-content-center align-items-center">
                             <h5 class="card-title">${item.subTitle} <c:if test="${item.newArticle}"><img src="https://img.icons8.com/office/16/null/new.png"/></c:if></h5>
@@ -249,15 +248,15 @@
     <div class="container mt-3">
         <ul class="pagination justify-content-center">
             <c:if test="${not pageMaker.first}">
-                <li class="page-item"><a class="page-link" href="">이전</a></li>
+                <li class="page-item"><a id="prevPage" class="page-link" href="">이전</a></li>
             </c:if>
 
             <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                <li class="page-item ${pageMaker.nowPage == num ? 'active' : ''}"><a class="page-link" href="/user/board/list?groupId=${listParam.groupId}&page=${num-1}">${num}</a></li>
+                <li class="page-item ${pageMaker.nowPage == num ? 'active' : ''}"><a data-id="${num-1}" class="page-link pageList" href="">${num}</a></li>
             </c:forEach>
 
             <c:if test="${not pageMaker.last}">
-                <li class="page-item"><a class="page-link" href="">다음</a></li>
+                <li class="page-item"><a id="postPage" class="page-link" href="">다음</a></li>
             </c:if>
         </ul>
     </div>
@@ -327,6 +326,45 @@
               }
           })
   }
+  function setPageUrl(){
+      const url =  document.location.href;
+
+      let pageList = document.querySelectorAll('.pageList');
+
+      //페이지 링크 걸기
+      for (let page of [...pageList]) {
+          let id = page.dataset.id;
+          if(!url.includes('page')){
+              page.href=url+"&page="+id;
+          }else {
+              let index = url.indexOf('page');
+              let originUrl = url.substring(0,index-1);
+
+              page.href=originUrl+"&page="+id;
+          }
+      }
+      //이전 페이지 링크 걸기
+      let prevPage = document.getElementById('prevPage');
+
+      if(prevPage!=null){
+          let lastIndex = url.lastIndexOf('=');
+          let prevUrl = url.substring(0,lastIndex+1);
+          let number =Number(url.substring(lastIndex+1));
+          prevPage.href=prevUrl+(number-1);
+
+      }
+
+      //다음 페이지링크 걸기
+      let postPage = document.getElementById('postPage');
+      if (!url.includes('page')){
+          postPage.href=url+"&page=1";
+      } else {
+          let lastIndex = url.lastIndexOf('=');
+          let postUrl = url.substring(0,lastIndex+1);
+          let number =Number(url.substring(lastIndex+1));
+          postPage.href=postUrl+(number+1);
+      }
+  }
 
 
 
@@ -334,7 +372,7 @@
     choiceBoard();
     showImage();
     checkedChoiceButton();
-    // searchCondition();
+    setPageUrl();
 
   })();
 </script>

@@ -52,7 +52,7 @@
 
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile" accept="image/*" name="thumbNail">
-                <label for="formFile" class="form-label explain"> &nbsp * 썸네일 사진을 골라주세요 (250*250) *</label>
+                <label for="formFile" class="form-label explain"> &nbsp * 썸네일 사진을 골라주세요 가로 세로 비율이 같아야 합니다. *</label>
             </div>
 
             <div class="input-group mb-3">

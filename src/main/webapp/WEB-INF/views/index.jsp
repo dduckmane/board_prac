@@ -21,10 +21,9 @@
 
   <style>
     #image {
-      width: 250px;
-      height: 250px;
       object-fit: fill;
     }
+
   </style>
 
   <title>🍴Matjip</title>
@@ -63,17 +62,17 @@
       </div>
       <div id="slick-slide" class="sercives-body">
         <c:forEach var="item" items="${items}">
-          <div class="services-col mx-2 my-3">
-            <div class="card">
-              <div class="overlay d-flex flex-column justify-content-center align-items-center">
-                <h3>${item.name}</h3>
-                <p>조회수 ${item.viewCnt}</p>
+          <a href="/user/board/${item.itemId}">
+            <div class="services-col mx-2 my-3">
+              <div class="card" style="width: 35vh; height: 35vh;">
+                <div id="imageBox" class="overlay d-flex flex-column justify-content-center align-items-center">
+                  <h3>${item.name}</h3>
+                  <p>조회수 ${item.viewCnt}</p>
+                </div>
+                  <img id="image" src="/images?itemId=${item.itemId}" alt="" class="card-img-top img-thumbnail w-100 h-100">
               </div>
-              <a href="#">
-                <img id="image" src="/images?itemId=${item.itemId}" alt="" class="card-img-top" width="250px" height="250px">
-              </a>
             </div>
-          </div>
+          </a>
         </c:forEach>
       </div>
     </div>
