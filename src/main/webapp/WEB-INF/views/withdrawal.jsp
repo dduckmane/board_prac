@@ -7,7 +7,7 @@
 
 </body>
 <script>
-  alert('로그 아웃');
+  alert('회원 탈퇴가 완료되었습니다.');
   window.location.href="/";
 </script>
 </html>

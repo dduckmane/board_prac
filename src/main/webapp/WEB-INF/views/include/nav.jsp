@@ -29,6 +29,7 @@
           <li class="nav-item"><a href="/user/board/list?param=choice" class="nav-link link-light px-2"><sec:authentication property="principal.member.name"/>님의 찜 목록</a></li>
           <li class="nav-item"><a href="/user/board/list?param=recommend" class="nav-link link-light px-2"><sec:authentication property="principal.member.name"/>님 맞춤 추천</a></li>
           <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">로그 아웃</a></li>
+          <li class="nav-item"><a href="/user/withdrawal" class="nav-link link-light px-2">회원 탈퇴</a></li>
         </sec:authorize>
       </ul>
 

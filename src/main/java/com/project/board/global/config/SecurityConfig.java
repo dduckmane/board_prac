@@ -27,7 +27,6 @@ public class SecurityConfig{
         httpSecurity.csrf().disable();
         httpSecurity
                 .logout()
-                .logoutSuccessUrl("/logoutHandler")
                 .and()
                 .authorizeRequests()
 
