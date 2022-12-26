@@ -312,13 +312,13 @@
                   , body: JSON.stringify(choiceData)
 
               }
-              fetch('/user/board',reqInfo);
+              fetch('/user/choice',reqInfo);
           })
       }
 
   }
   function checkedChoiceButton(){
-      fetch('/user/board')
+      fetch('/user/choice')
           .then(res => res.json())
           .then(checkedIdList => {
               for(let boardId of [...checkedIdList]){
