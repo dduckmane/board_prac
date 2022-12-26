@@ -78,7 +78,7 @@
                 <input type="hidden" id="region" value="${boardUpdateForm.representativeArea}">
 
                 <c:forEach var="tag" varStatus="status" items="${tags}">
-                    <input type="checkbox" class="btn-check" name="tag" value=${tag} id=${status.index}>
+                    <input type="checkbox" class="btn-check" name="tag" value=${tag} <c:if test="${fn:contains(boardUpdateForm.tag,tag)}">checked</c:if> id=${status.index}>
                     <label class="btn btn-outline-secondary" for=${status.index}>${tag.description}</label>
                 </c:forEach>
 
@@ -224,7 +224,7 @@ CKEDITOR.replace('content',
     function checkRegion(){
         let region = document.getElementById('region');
         let regionTag = document.getElementById(region.value);
-        console.log(regionTag)
+
         regionTag.selected=true;
     }
 

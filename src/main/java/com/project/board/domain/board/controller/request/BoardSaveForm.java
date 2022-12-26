@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class BoardSaveForm {
+    @NotNull
     private MultipartFile thumbNail;
     @Length(min = 2, max = 50)
     private String title;
