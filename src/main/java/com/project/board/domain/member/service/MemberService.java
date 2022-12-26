@@ -1,7 +1,7 @@
 package com.project.board.domain.member.service;
 
 import com.project.board.domain.board.controller.request.ListParam;
-import com.project.board.domain.board.search.BoardSearchCondition;
+import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
