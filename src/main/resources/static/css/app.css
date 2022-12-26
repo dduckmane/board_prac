@@ -7,8 +7,8 @@
 
 /* Top Section */
 #top {
-  
-  background-image: url('../img/food/kor/KakaoTalk_20221103_061409896_02.jpg');
+
+  background-image: url('../img/main/KakaoTalk_Photo_2022-12-23-15-47-42 001.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -17,7 +17,7 @@
   transition: 0.6s;
 }
 #top:hover{
-  background-image: url('../img/food/kor/KakaoTalk_20221103_061409896_02.jpg');
+  background-image: url('../img/main/KakaoTalk_Photo_2022-12-23-15-47-42 001.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -176,34 +176,34 @@
 }
 
 #gallery .gallery-item:nth-of-type(1) .card {
-  background-image: url('https://w.namu.la/s/b5ce7f785eca5394daf4e19a920e10bd1c2e89352f07ef3256ed61abdc6fb5ae7d24a4379478f9f26df1b53d7674d4c756ecbef6d8105b70992569614ca1fdd7d7dab37e1e184aad394a3bcc053509391988fbaca2d6ca645a0e21ccee7c889b3612378080cc5b9065e6355529758381');
+  background-image: url('../img/regions/takertable.jpeg');
 }
 
 #gallery .gallery-item:nth-of-type(2) .card {
-  background-image: url('../img/regions/경기도.jpg');
+  background-image: url('../img/regions/donkas.jpeg');
 }
 
 #gallery .gallery-item:nth-of-type(3) .card {
-  background-image: url('../img/regions/인천.jpg');
+  background-image: url('../img/regions/joge.jpeg');
 }
 #gallery .gallery-item:nth-of-type(4) .card {
-  background-image: url('../img/regions/강원도.jpg');
+  background-image: url('../img/regions/dackgalbi.jpeg');
 }
 
 #gallery .gallery-item:nth-of-type(5) .card {
-  background-image: url('../img/regions/경상북도.jpg');
+  background-image: url('../img/regions/전라북도.jpg');
 }
 
 #gallery .gallery-item:nth-of-type(6) .card {
-  background-image: url('../img/regions/다운로드.jpg');
+  background-image: url('../img/regions/mackgoocksu.jpeg');
 }
 
 #gallery .gallery-item:nth-of-type(7) .card {
-  background-image: url('../img/regions/전라남도.jpg');
+  background-image: url('../img/regions/dechang.jpeg');
 }
 
 #gallery .gallery-item:nth-of-type(8) .card {
-  background-image: url('../img/regions/전라북도.jpg');
+  background-image: url('../img/regions/hea.jpeg');
 }
 
 #gallery .gallery-item:nth-of-type(9) .card {

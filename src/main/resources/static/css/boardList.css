@@ -21,8 +21,8 @@ h3,
 
 /* Top Section */
 #top {
-  
-  background-image: url('../img/food/kor/KakaoTalk_20221103_061409896_02.jpg');
+
+  background-image: url('../img/main/KakaoTalk_Photo_2022-12-23-15-47-42 001.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,7 +31,7 @@ h3,
   transition: 0.6s;
 }
 #top:hover{
-  background-image: url('../img/food/kor/KakaoTalk_20221103_061409896_02.jpg');
+  background-image: url('../img/main/KakaoTalk_Photo_2022-12-23-15-47-42 001.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -15,11 +15,11 @@ h3,
 
 #top {
 
-    background-image: url('../img/food/kor/KakaoTalk_20221103_061409896_02.jpg');
+    background-image: url('../img/regions/hea.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 20vh;
+    height: 30vh;
     position: relative;
     transition: 0.6s;
 }
