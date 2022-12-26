@@ -72,13 +72,13 @@
                                 <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'MOOD')}" > checked</c:if> id="option1" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option1">분위기</label>
 
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PLAY')}" > checked</c:if> id="option2" disabled>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PRICE')}" > checked</c:if> id="option2" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option2">가성비</label>
 
                                 <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'RESERVATION')}" > checked</c:if> id="option3" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option3">예약 가능</label>
 
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PRICE')}" > checked</c:if> id="option4" disabled>
+                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PLAY')}" > checked</c:if> id="option4" disabled>
                                 <label class="btn btn-outline-secondary w-20" for="option4">놀기좋은</label>
                             </div>
                         </div>

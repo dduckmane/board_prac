@@ -99,12 +99,12 @@ public class Board extends BaseEntity {
     }
 
     public String substringTitle() {
-        // 만약에 글제목이 5글자 이상이라면
-        // 5글자만 보여주고 나머지는 ...처리
+        // 만약에 글제목이 7글자 이상이라면
+        // 7글자만 보여주고 나머지는 ...처리
         String title = this.getTitle();
-        if (title.length() > 5) {
-            String subStr = title.substring(0, 5);
-            return subStr+"...";
+        if (title.length() > 12) {
+            String subStr = title.substring(0, 12);
+            return subStr+"..";
         } else {
             return title;
         }

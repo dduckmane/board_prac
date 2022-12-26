@@ -1,4 +1,4 @@
-package com.project.board.domain.board.search;
+package com.project.board.domain.board.controller.request.search;
 
 import lombok.Data;
 

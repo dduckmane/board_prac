@@ -1,7 +1,7 @@
 package com.project.board.domain.board.repository;
 
 import com.project.board.domain.board.domain.Board;
-import com.project.board.domain.board.search.BoardSearchCondition;
+import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
