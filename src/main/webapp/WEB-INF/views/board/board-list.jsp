@@ -225,7 +225,7 @@
                 <div class="col-md">
                     <div class="card mb-3 p-0">
                         <a href="/user/board/${item.id}">
-                            <img id="image" data-item-id="${item.id}" class="card-img card-img-left img-fluid " src="" alt="Card image" >
+                            <img id="image" data-item-id="${item.id}" class="card-img card-img-left img-fluid img-thumbnail" src="" alt="Card image" >
                         </a>
                         <div class="card-body p-1 m-0 d-flex flex-column justify-content-center align-items-center">
                             <h5 class="card-title">${item.subTitle} <c:if test="${item.newArticle}"><img src="https://img.icons8.com/office/16/null/new.png"/></c:if></h5>
