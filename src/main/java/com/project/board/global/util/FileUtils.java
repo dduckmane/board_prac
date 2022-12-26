@@ -52,8 +52,6 @@ public class FileUtils {
      * @return - 업로드가 완료된 새로운 파일의 full path
      */
     public static String uploadFile(MultipartFile file, String uploadPath) {
-        checkImage(file.getOriginalFilename());
-
         // 중복이 없는 파일명으로 변경하기
         // ex) 상어.png -> 3dfsfjkdsfds-djksfaqwerij-dsjkfdkj_상어.png
         String newFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();

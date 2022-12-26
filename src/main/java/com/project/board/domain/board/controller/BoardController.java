@@ -103,7 +103,6 @@ public class BoardController {
                 , result.getTotalPages());
 
         model.addAttribute("pageMaker", pageMaker);
-
         return "board/board-list";
     }
 
@@ -145,25 +144,14 @@ public class BoardController {
             , BindingResult bindingResult
             , @PathVariable int groupId
     ) {
-        UploadFile uploadFile = null;
-
-        try {
-            uploadFile = UploadFile.createUploadFile(boardSaveForm.getThumbNail(), UPLOAD_PATH);
-        } catch (IllegalArgumentException e) {
-            bindingResult.addError(new FieldError("boardSaveForm", "thumbNail", e.getMessage()));
-        }
-
-        if (bindingResult.hasErrors()) {
-            System.out.println("bindingResult = " + bindingResult);
-            return "board/board-write";
-        }
+        if (bindingResult.hasErrors()) return "board/board-write";
 
         boardService.save(
                 principalDetails.getMember()
                 , groupId
                 , boardSaveForm.getTitle()
                 , boardSaveForm.getContent()
-                , uploadFile
+                , UploadFile.createUploadFile(boardSaveForm.getThumbNail(), UPLOAD_PATH)
                 , new Address(
                         boardSaveForm.getRepresentativeArea()
                         , boardSaveForm.getDetailArea())
@@ -174,8 +162,14 @@ public class BoardController {
     }
 
     @GetMapping("/edit/{boardId}")
-    public String editForm(@PathVariable Long boardId, Model model) {
-        BoardUpdateForm boardUpdateForm = boardRepository.findById(boardId).map(BoardUpdateForm::new).orElseThrow();
+    public String editForm(
+            @PathVariable Long boardId
+            , Model model) {
+
+        BoardUpdateForm boardUpdateForm = boardRepository
+                .findById(boardId)
+                .map(BoardUpdateForm::new)
+                .orElseThrow();
 
         model.addAttribute("boardUpdateForm", boardUpdateForm);
         return "board/board-modify";
@@ -188,20 +182,19 @@ public class BoardController {
             , BindingResult bindingResult
             , RedirectAttributes redirectAttributes
     ) {
-        boardRepository.findMemberById(boardUpdateForm.getId()).orElseThrow().checkMySelf(principalDetails.getUsername());
+        boardRepository
+                .findMemberById(boardUpdateForm.getId())
+                .orElseThrow().
+                checkMySelf(principalDetails.getUsername());
 
         UploadFile uploadFile = null;
-        if(boardUpdateForm.getThumbNail().getSize()!=0){
-            try {
-                uploadFile = UploadFile.createUploadFile(boardUpdateForm.getThumbNail(), UPLOAD_PATH);
-            } catch (IllegalArgumentException e) {
-                bindingResult.addError(new FieldError("boardUpdateForm", "thumbNail", e.getMessage()));
-            }
-        }
-        if (bindingResult.hasErrors()) {
-            System.out.println("bindingResult = " + bindingResult);
-            return "board/board-modify";
-        }
+
+        if(boardUpdateForm.getThumbNail().getSize()!=0)
+            uploadFile = UploadFile
+                    .createUploadFile(boardUpdateForm.getThumbNail(), UPLOAD_PATH);
+
+
+        if (bindingResult.hasErrors()) return "board/board-modify";
 
         boardService.update(
                 boardUpdateForm.getId()
@@ -214,6 +207,7 @@ public class BoardController {
                 , boardUpdateForm.getPrice()
                 , boardUpdateForm.getTag()
         );
+
         redirectAttributes.addAttribute("boardId",boardUpdateForm.getId());
         return "redirect:/user/board/{boardId}";
     }
