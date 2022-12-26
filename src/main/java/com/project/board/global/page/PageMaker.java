@@ -1,4 +1,4 @@
-package com.project.board.domain.page;
+package com.project.board.global.page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

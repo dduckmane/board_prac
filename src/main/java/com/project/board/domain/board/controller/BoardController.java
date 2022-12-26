@@ -16,7 +16,7 @@ import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.service.BoardService;
 import com.project.board.domain.member.service.MemberService;
-import com.project.board.domain.page.PageMaker;
+import com.project.board.global.page.PageMaker;
 import com.project.board.global.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
