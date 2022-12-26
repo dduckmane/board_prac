@@ -64,7 +64,7 @@
                 </div>
 
                 <div id="naver" class="col-12 d-flex justify-content-center align-items-center">
-                    <a href="/oauth2/authorization/naver" class="h-90 w-100">
+                    <a href="/oauth2/authorization/naver" class="h-100 w-100">
                     </a>
                 </div>
                 <div class="text-center py-10 font-monospace">
