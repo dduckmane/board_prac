@@ -18,5 +18,6 @@ public class SearchInfoService {
         SearchInfo searchInfo = searchInfoRepository.findByMember(member).orElseThrow();
 
         searchInfo.addCnt(member,type,param);
+
     }
 }

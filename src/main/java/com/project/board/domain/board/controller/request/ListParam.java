@@ -1,5 +1,6 @@
 package com.project.board.domain.board.controller.request;
 
+import com.project.board.domain.board.boardConst.BoardConst;
 import com.project.board.domain.board.domain.boardenum.Category;
 import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
@@ -15,9 +16,10 @@ import static com.project.board.domain.board.domain.boardenum.Regions.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//Board list 에 requestParam
 public class ListParam {
-    private Integer groupId;
-    private String param;
+    private Integer groupId;// 한식, 양식, 중식, 일식
+    private String param;// recommend, choice, region
 
     public Object getParam(){
         return checkParam() ? groupId: param;
@@ -36,6 +38,7 @@ public class ListParam {
         return info;
     }
 
+    //banner 부분의 title 을 동적으로 관리
     public String getTitle(Member member){
 
         return checkParam() ? Category.getDescription(groupId) : getName(member);
@@ -43,8 +46,8 @@ public class ListParam {
     }
 
     public String getName(Member member){
-        if(param.equals("choice")) return member.getName()+" 님의 찜 목록";
-        if (param.equals("recommend")) return member.getName()+" 님의 전용 맞춤";
+        if(param.equals(BoardConst.CHOICE)) return member.getName()+" 님의 찜 목록";
+        if (param.equals(BoardConst.RECOMMEND)) return member.getName()+" 님의 전용 맞춤";
         if (param.equals(SEOUL.toString())) return SEOUL.getDescription();
         if (param.equals(GYEONGGI.toString())) return GYEONGGI.getDescription();
         if (param.equals(INCHEON.toString())) return INCHEON.getDescription();

@@ -1,9 +1,7 @@
 package com.project.board.domain.board.service;
 
-import com.project.board.domain.board.controller.request.BoardUpdateForm;
 import com.project.board.domain.board.domain.Address;
 import com.project.board.domain.board.domain.Board;
-import com.project.board.domain.board.domain.BoardFiles;
 import com.project.board.domain.board.domain.UploadFile;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.Member;
@@ -16,10 +14,8 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.MetaMessage;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @Service

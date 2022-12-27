@@ -32,7 +32,6 @@ public class MemberApiController {
     public List<Long> findChoiceBoardId(
             @AuthenticationPrincipal PrincipalDetails principalDetails
     ){
-
         return memberRepository
                 .findByUsername(principalDetails.getUsername())
                 .orElseThrow()

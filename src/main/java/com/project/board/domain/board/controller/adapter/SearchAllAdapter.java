@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @RequiredArgsConstructor
+//한식, 양식, 중식, 일식 페이지 관련 adapter
 public class SearchAllAdapter implements findQueryAdapter{
 
     private final BoardRepositoryImpl boardRepository;

@@ -85,8 +85,7 @@ public class BoardController {
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, result.getTotalPages());
 
-        List<BoardDto> content = result.getContent();
-        model.addAttribute("BoardDtoList", content);
+        model.addAttribute("BoardDtoList", result.getContent());
         model.addAttribute("Param", listParam.getParam());
         model.addAttribute("requestParam", listParam.getRequest());
         model.addAttribute("title", listParam.getTitle(principalDetails.getMember()));

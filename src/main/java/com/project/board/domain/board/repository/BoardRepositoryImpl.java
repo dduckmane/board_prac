@@ -2,6 +2,7 @@ package com.project.board.domain.board.repository;
 
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
+import com.project.board.domain.member.domain.searchInfo.QSearchInfo;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static com.project.board.domain.board.domain.QBoard.board;
 import static com.project.board.domain.member.domain.QMember.member;
+import static com.project.board.domain.member.domain.searchInfo.QSearchInfo.searchInfo;
 import static org.apache.logging.log4j.util.Strings.isEmpty;
 
 
@@ -102,11 +104,11 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     }
     @Override
     public Page<Board> searchAll(BoardSearchCondition searchCondition, Pageable pageable) {
-
         List<Board> result = queryFactory
                 .select(board).distinct()
                 .from(board)
                 .join(board.member,member).fetchJoin()
+                .join(member.searchInfo,searchInfo).fetchJoin()
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
