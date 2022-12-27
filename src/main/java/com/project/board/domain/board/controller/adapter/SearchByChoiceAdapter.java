@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import static com.project.board.domain.board.boardConst.BoardConst.*;
 
 @RequiredArgsConstructor
+//찜 목록 관련 adapter
 public class SearchByChoiceAdapter implements findQueryAdapter{
 
     private final BoardRepositoryImpl boardRepository;

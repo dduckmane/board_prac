@@ -18,9 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 
 @Controller
@@ -41,31 +38,18 @@ public class HomeController {
             @PageableDefault(page = 0) Pageable pageable
             , Model model
     ) {
-        Page<BestDto> bestDtos = boardRepository.searchBestInfo(pageable).map(board -> {
-            try {
-                return new BestDto(board);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        model.addAttribute("items", bestDtos.getContent());
-        return "index";
+        model.addAttribute("items"
+                , boardRepository
+                        .searchBestInfo(pageable)
+                        .map(BestDto::new).
+                        getContent()
+        );
 
+        return "index";
     }
 
     @GetMapping("/login")
     public String loginForm(){
         return "loginForm";
     }
-
-    @GetMapping("/recommand")
-    public void recommand(@AuthenticationPrincipal PrincipalDetails principalDetails)
-    {
-        SearchInfo searchInfo = principalDetails.getMember().getSearchInfo();
-        CategoryCnt category = searchInfo.getCategory();
-
-    }
-
-
-
 }

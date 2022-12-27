@@ -17,9 +17,13 @@ import java.util.stream.Collectors;
 import static com.project.board.domain.board.boardConst.BoardConst.*;
 
 @RequiredArgsConstructor
+/**
+ * 추천 페이지 관련 adapter
+ **/
 public class SearchByRecommendAdapter implements findQueryAdapter{
 
     private final BoardRepositoryImpl boardRepository;
+    //각 board 와 그에 맞는 회원 별 board 에 대한 점수를 list 에 담아 놓는다.
     private List<RecommendListDto> recommendListDtos =new ArrayList<>();
 
     @Override
@@ -32,7 +36,7 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
 
     @Override
     public Page<Board> handle(Object param, BoardSearchCondition searchCondition, Pageable pageable) {
-        //하기전 list를 비움
+        //하기전 list 를 비움
         recommendListDtos.clear();
 
         Page<Board> boards = boardRepository.searchAll(searchCondition, pageable);
@@ -40,10 +44,9 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
 
         content.stream().forEach(board -> {
             //각 board 의 점수를 환산
-            /**
-             * searchInfo도 fetch join
-             **/
+            //board member searchInfo 테이블 fetch join
             int totalScore = board.getMember().getSearchInfo().getTotalScore(board);
+
             //환산한 board 의 점수와 board 를 list 에 담음
             recommendListDtos.add(new RecommendListDto(totalScore,board));
         });
@@ -51,7 +54,11 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
         Collections.sort(recommendListDtos);
 
         //새로운 page 객체를 만듦
-        List<Board> result = recommendListDtos.stream().map(recommendListDto -> recommendListDto.getBoard()).collect(Collectors.toList());
+        List<Board> result = recommendListDtos
+                .stream()
+                .map(RecommendListDto::getBoard)
+                .collect(Collectors.toList());
+
         return new PageImpl<>(result,pageable,boards.getTotalElements());
     }
 }

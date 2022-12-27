@@ -12,11 +12,13 @@ import java.util.List;
 
 import static com.project.board.domain.board.domain.boardenum.Category.*;
 import static com.project.board.domain.board.domain.boardenum.Category.JAPAN;
+import static com.project.board.domain.board.domain.boardenum.Regions.*;
 import static com.project.board.domain.board.domain.boardenum.Tag.*;
 import static com.project.board.domain.board.domain.boardenum.Tag.PLAY;
 
 @Component
 @Getter
+//ModelAttribute 에 담을 값들을 init
 public class BoardInit {
     private List<Tag> tags=new ArrayList<>();
     private List<Category> categories=new ArrayList<>();
@@ -44,15 +46,15 @@ public class BoardInit {
 
     }
     public void initRegions(){
-        regions.add(Regions.SEOUL);
-        regions.add(Regions.GYEONGGI);
-        regions.add(Regions.INCHEON);
-        regions.add(Regions.GANG);
-        regions.add(Regions.JS);
-        regions.add(Regions.JN);
-        regions.add(Regions.GS);
-        regions.add(Regions.GN);
-        regions.add(Regions.JEJU);
+        regions.add(SEOUL);
+        regions.add(GYEONGGI);
+        regions.add(INCHEON);
+        regions.add(GANG);
+        regions.add(JS);
+        regions.add(JN);
+        regions.add(GS);
+        regions.add(GN);
+        regions.add(JEJU);
     }
 
 

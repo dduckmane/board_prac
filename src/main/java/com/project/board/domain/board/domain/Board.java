@@ -17,7 +17,6 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Setter
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +39,6 @@ public class Board extends BaseEntity {
     private int price;
 
     private String tagSum;
-
 
     public Board(String title){
         this.title=title;
@@ -68,11 +66,6 @@ public class Board extends BaseEntity {
             return Arrays.asList(this.tagSum.split(","));
         }
         return new ArrayList<>();
-    }
-
-    public void setReplies(Reply reply) {
-        replies.add(reply);
-        reply.setBoard(this);
     }
     public static Board write(
             Member member

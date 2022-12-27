@@ -18,8 +18,11 @@ public class SearchInfo {
 
     public static String CATEGORY="category";
     public static String REGION="regions";
-    public static String PRICE="price";
     public static String TAG="tag";
+    public static String PRICE="price";
+    public static String NAME="name";
+    public static String TITLE="title";
+    public static String ALL="all";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

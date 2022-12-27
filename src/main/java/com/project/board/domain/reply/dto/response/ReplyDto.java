@@ -1,6 +1,7 @@
-package com.project.board.domain.reply.dto;
+package com.project.board.domain.reply.dto.response;
 
 import com.project.board.domain.reply.domain.Reply;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
 import java.time.format.DateTimeFormatter;
@@ -15,7 +16,13 @@ public class ReplyDto {
 
         this.id=reply.getId();
         this.replyText = reply.getReplyText();
-        this.replyWriter = reply.getMember().getName();//이거 나중에 수정--> 시큐리티로 이용
-        this.createDate = reply.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        this.replyWriter = reply
+                .getMember()
+                .getName();
+
+        this.createDate = reply
+                .getCreatedDate()
+                .format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 }

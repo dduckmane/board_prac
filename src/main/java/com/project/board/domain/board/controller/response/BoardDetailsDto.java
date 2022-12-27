@@ -1,6 +1,5 @@
 package com.project.board.domain.board.controller.response;
 
-import com.project.board.domain.board.dto.BoardFilesDto;
 import com.project.board.domain.board.domain.Board;
 import lombok.AccessLevel;
 import lombok.Data;
