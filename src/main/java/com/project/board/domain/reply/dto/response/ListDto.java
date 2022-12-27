@@ -1,5 +1,6 @@
-package com.project.board.domain.reply.dto;
+package com.project.board.domain.reply.dto.response;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 
@@ -10,7 +11,13 @@ public class ListDto {
     private int startPage;
     private Page<ReplyDto> results;
 
-    public ListDto(int nowPage, int endPage, int startPage, Page<ReplyDto> results) {
+    @Builder
+    public ListDto(
+            int nowPage
+            , int endPage
+            , int startPage
+            , Page<ReplyDto> results
+    ) {
         this.nowPage = nowPage;
         this.endPage = endPage;
         this.startPage = startPage;

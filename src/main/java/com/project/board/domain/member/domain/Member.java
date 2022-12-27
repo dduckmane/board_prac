@@ -41,10 +41,6 @@ public class Member extends BaseTimeEntity {
         this.searchInfo=searchInfo;
     }
 
-    public void setReplies(Reply reply) {
-        this.replies.add(reply);
-        reply.setMember(this);
-    }
     @Builder
     public Member(
             String name
@@ -65,12 +61,13 @@ public class Member extends BaseTimeEntity {
     }
 
     public void choiceBoard(Long boardId) {
-        Long findBoardId = choiceBoard.stream().filter(id -> id == boardId).findFirst().orElse(null);
+        Long findBoardId = choiceBoard
+                .stream()
+                .filter(id -> id == boardId).
+                findFirst()
+                .orElse(null);
 
-        if(findBoardId==null){
-            choiceBoard.add(boardId);
-        }else{
-            choiceBoard.remove(boardId);
-        }
+        if(findBoardId==null) choiceBoard.add(boardId);
+        else choiceBoard.remove(boardId);
     }
 }

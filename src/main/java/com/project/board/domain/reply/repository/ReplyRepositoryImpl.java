@@ -32,18 +32,12 @@ public class ReplyRepositoryImpl implements ReplyRepositoryCustom{
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
+
         JPAQuery<Long> CountQuery = queryFactory
                 .select(reply.count())
                 .where(board.id.eq(boardId))
                 .from(reply);
-        return PageableExecutionUtils.getPage(results,pageable,CountQuery::fetchOne);
-    }
 
-    @Override
-    public Long getTotalCount() {
-        Long totalCount = queryFactory
-                .select(reply.count())
-                .from(reply).fetchOne();
-        return totalCount;
+        return PageableExecutionUtils.getPage(results,pageable,CountQuery::fetchOne);
     }
 }

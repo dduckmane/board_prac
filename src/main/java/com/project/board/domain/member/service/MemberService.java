@@ -28,7 +28,11 @@ public class MemberService {
     }
 
     //정보를 수집
-    public void collectInfo(Member member, ListParam listParam, BoardSearchCondition searchCondition) {
+    public void collectInfo(
+            Member member
+            , ListParam listParam
+            , BoardSearchCondition searchCondition
+    ) {
         Map<String, String> info = listParam.getInfo();
         Map<String, String> info1 = searchCondition.getInfo();
 
@@ -43,7 +47,6 @@ public class MemberService {
     }
 
     public void withdrawal(Member member){
-
         boardRepository
                 .findBoardByMember(member)
                 .stream()
