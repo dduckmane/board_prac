@@ -1,19 +1,15 @@
 package com.project.board.domain.member.domain.searchInfo.searchCnt;
 
 import com.project.board.domain.board.domain.Board;
-import com.project.board.domain.member.domain.searchInfo.SearchInfo;
-import com.project.board.global.testInit.MemberTestInit;
+import com.project.board.global.testInit.TestInit;
 import org.junit.jupiter.api.*;
 
-import javax.naming.Name;
-
-import static com.project.board.global.domainConst.BoardConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class NameInfoAddTest extends MemberTestInit {
+class NameInfoAddTest extends TestInit {
 
     NameInfoAdd nameInfoAdd = new NameInfoAdd();
     @Test

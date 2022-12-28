@@ -16,19 +16,24 @@ public class ReplyService {
     private final ReplyRepository replyRepository;
     private final BoardRepository boardRepository;
     @Transactional
-    public void save(Long boardId, Member member,String replyText){
+    public Long save(Long boardId, Member member,String replyText){
         Board board = boardRepository.findById(boardId).orElseThrow();
         Reply reply = Reply.write(replyText, board, member);
-        replyRepository.save(reply);
+
+        Reply saveReply = replyRepository.save(reply);
+
+        return saveReply.getId();
     }
     @Transactional
     public void update(Long replyId,String replyText){
         Reply reply = replyRepository.findById(replyId).orElseThrow();
+
         reply.update(replyText);
     }
     @Transactional
     public void delete(Long replyId){
         Reply reply = replyRepository.findById(replyId).orElseThrow();
+
         replyRepository.delete(reply);
     }
 

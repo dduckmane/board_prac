@@ -9,8 +9,7 @@ import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
 import com.project.board.domain.member.repository.MemberRepository;
 import com.project.board.domain.member.repository.SearchInfoRepository;
-import com.project.board.global.testInit.MemberTestInit;
-import org.assertj.core.api.Assertions;
+import com.project.board.global.testInit.TestInit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class MemberServiceTest extends MemberTestInit {
+class ServiceTest extends TestInit {
     @Autowired
     MemberService memberService;
     @Autowired

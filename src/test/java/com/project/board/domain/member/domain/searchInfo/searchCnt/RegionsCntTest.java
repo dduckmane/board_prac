@@ -3,16 +3,15 @@ package com.project.board.domain.member.domain.searchInfo.searchCnt;
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
 import com.project.board.global.domainConst.BoardConst;
-import com.project.board.global.testInit.MemberTestInit;
+import com.project.board.global.testInit.TestInit;
 import org.junit.jupiter.api.*;
 
-import static com.project.board.domain.board.domain.boardenum.Category.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RegionsCntTest extends MemberTestInit {
+class RegionsCntTest extends TestInit {
     RegionsCnt regionsCnt=new RegionsCnt();
     @Test
     void support() {
