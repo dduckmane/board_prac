@@ -30,11 +30,10 @@ public class TagCnt implements AddCnt {
     }
     @Override
     public void addCnt(String tag) {
-
         if(tag.contains(MOOD.toString())) tagOption1++;
-        else if(tag.contains(PRICE.toString())) tagOption2++;
-        else if(tag.contains(RESERVATION.toString())) tagOption3++;
-        else tagOption4++;
+        if(tag.contains(PRICE.toString())) tagOption2++;
+        if(tag.contains(RESERVATION.toString())) tagOption3++;
+        if(tag.contains(PLAY.toString())) tagOption4++;
     }
     public int getScore(String tag){
 
@@ -52,13 +51,13 @@ public class TagCnt implements AddCnt {
         return getScoreByGroupId(tag);
     }
 
-    private Integer getScoreByGroupId(String tag) {
+    private Integer getScoreByGroupId(String tagSum) {
         int sum=0;
 
-        if(tag.contains(MOOD.toString()))  sum+=orderMap.get("tagOption1");
-        if(tag.equals(PRICE.toString())) sum+= orderMap.get("tagOption2");
-        if(tag.equals(RESERVATION.toString())) sum+= orderMap.get("tagOption3");
-        if(tag.equals(PLAY.toString())) sum+= orderMap.get("tagOption4");
+        if(tagSum.contains(MOOD.toString()))  sum+=orderMap.get("tagOption1");
+        if(tagSum.contains(PRICE.toString())) sum+= orderMap.get("tagOption2");
+        if(tagSum.contains(RESERVATION.toString())) sum+= orderMap.get("tagOption3");
+        if(tagSum.contains(PLAY.toString())) sum+= orderMap.get("tagOption4");
 
         return sum;
     }

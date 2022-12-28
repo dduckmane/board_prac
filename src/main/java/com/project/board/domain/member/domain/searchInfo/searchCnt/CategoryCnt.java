@@ -37,7 +37,7 @@ public class CategoryCnt implements AddCnt {
     }
 
     public int getScore(int groupId){
-
+        // ex) 3categoryOption1 4categoryOption2 9categoryOption3 2categoryOption4
         String[] orders ={
                 Integer.toString(categoryOption1)+"categoryOption1"
                 ,Integer.toString(categoryOption2)+"categoryOption2"
@@ -45,8 +45,11 @@ public class CategoryCnt implements AddCnt {
                 ,Integer.toString(categoryOption4)+"categoryOption4"
                 ,"0"
         };
-
+        // String 을 이용한 정렬
+        // 2categoryOption4 3categoryOption1 4categoryOption2 9categoryOption3
         Arrays.sort(orders);
+        // map 에 카테고리별 점수가 담김
+        // (categoryOption4,2) (categoryOption1,3) (categoryOption2,4) (categoryOption3,978)
         order(0,orders,orderMap,orders.length-1,0);
 
         return getScoreByGroupId(groupId);

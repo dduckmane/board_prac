@@ -66,6 +66,7 @@ public class Member extends BaseTimeEntity {
         this.providerId = providerId;
     }
 
+    //board 를 한번 누르면 리스트에 담기고 두번 누르면 제거
     public void choiceBoard(Long boardId) {
         Long findBoardId = choiceBoard
                 .stream()

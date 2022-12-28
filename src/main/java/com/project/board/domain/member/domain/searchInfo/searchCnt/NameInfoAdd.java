@@ -24,14 +24,16 @@ public class NameInfoAdd implements AddCnt {
 
     @Override
     public void addCnt(String title) {
-        boolean duplication=false;
 
         for (String name : getNameByBlank(title)) {
-            //중복을 검사함
-            for (String key : orderMap.keySet()) duplication = key.equals(name);
+            String duplication=null;
 
-            //중복이 없다면 추가하고 있다면 증가
-            orderMap.put(name, duplication == false ? 1 : orderMap.get(name) + 1);
+            duplication = orderMap.keySet().stream()
+                    .filter(key -> key.equals(name))
+                    .findFirst()
+                    .orElse(null);
+            //중복이 있다면 값을 증가 없다면 새로 추가
+            orderMap.put(name,duplication==null? 1: orderMap.get(name)+1);
         }
     }
 
@@ -42,7 +44,7 @@ public class NameInfoAdd implements AddCnt {
 
         for (String search : nameByBlank) {
             for (Map.Entry<String, Integer> entry : entries) {
-                if(entry.getKey().equals(search)) sum+= entry.getValue();
+                if(search.contains(entry.getKey())) sum+= entry.getValue();
             }
         }
         return sum;
