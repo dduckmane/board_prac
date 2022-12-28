@@ -19,7 +19,7 @@ import static com.project.board.domain.board.domain.boardenum.Regions.*;
 //Board list 에 requestParam
 public class ListParam {
     private Integer groupId;// 한식, 양식, 중식, 일식
-    private String param;// recommend, choice, region
+    private String param;// recommend, choice, SEOUL, INCHEON, JN, JS ....
 
     public Object getParam(){
         return checkParam() ? groupId: param;

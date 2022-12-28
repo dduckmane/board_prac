@@ -70,7 +70,7 @@ class SearchInfoTest extends MemberTestInit {
 
         searchInfo.addCnt(member, SearchInfo.CATEGORY, String.valueOf(board.getGroupId()));
         searchInfo.addCnt(member, SearchInfo.REGION, board.getAddress().getRepresentativeArea());
-        searchInfo.addCnt(member, SearchInfo.PRICE, String.valueOf(board.getPrice()));
+        searchInfo.addCnt(member, SearchInfo.PRICE, "10000");
         searchInfo.addCnt(member, SearchInfo.TAG, board.getTagSum());
         searchInfo.addCnt(member, SearchInfo.TITLE, board.getTitle());
 

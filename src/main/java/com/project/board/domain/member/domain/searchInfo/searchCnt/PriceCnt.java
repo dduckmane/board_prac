@@ -28,12 +28,10 @@ public class PriceCnt implements AddCnt {
         return name.equals(PRICE);
     }
     @Override
-    public void addCnt(String value) {
-        Integer price = Integer.valueOf(value);
-
-        if(price<=10000) priceOption1++;
-        else if(price>10000&price<=20000) priceOption2++;
-        else if(price>20000&price<=30000) priceOption3++;
+    public void addCnt(String price) {
+        if(price.equals("10000")) priceOption1++;
+        else if(price.equals("20000")) priceOption2++;
+        else if(price.equals("30000")) priceOption3++;
         else priceOption4++;
     }
     public int getScore(int price){

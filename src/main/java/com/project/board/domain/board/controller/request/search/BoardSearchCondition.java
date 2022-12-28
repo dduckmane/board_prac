@@ -1,6 +1,7 @@
 package com.project.board.domain.board.controller.request.search;
 
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Map;
@@ -10,6 +11,7 @@ import static com.project.board.domain.member.domain.searchInfo.SearchInfo.*;
 import static com.project.board.domain.member.domain.searchInfo.SearchInfo.PRICE;
 
 @Data
+@Builder
 public class BoardSearchCondition {
     private String name;
     private String title;
