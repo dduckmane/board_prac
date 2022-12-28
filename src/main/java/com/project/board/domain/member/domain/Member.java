@@ -25,13 +25,19 @@ public class Member extends BaseTimeEntity {
     private String role; //ROLE_USER, ROLE_ADMIN
     private String provider;
     private String providerId;
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member"
+            , fetch = FetchType.LAZY
+            ,orphanRemoval = true
+            ,cascade = CascadeType.ALL)
     List <Reply> replies=new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.LAZY)
     List<Long> choiceBoard=new ArrayList<>();
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "searchInfo_id")
+
+    @OneToOne(mappedBy = "member"
+            , fetch = FetchType.LAZY
+            ,orphanRemoval = true
+            ,cascade = CascadeType.ALL)
     private SearchInfo searchInfo;
 
     public Member(String name){

@@ -20,13 +20,13 @@ import java.util.List;
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id", nullable = false)
+    @Column(name = "board_id")
     private Long id;
     private String title;
     private String content;
     private int groupId;
     private Long viewCnt=0L;
-    @OneToMany(mappedBy = "board",orphanRemoval = true)
+    @OneToMany(mappedBy = "board",orphanRemoval = true,cascade = CascadeType.ALL)
     private List<Reply>replies=new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

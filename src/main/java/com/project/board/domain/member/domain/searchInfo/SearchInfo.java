@@ -39,7 +39,8 @@ public class SearchInfo {
     @Embedded
     private NameInfoAdd nameInfoAdd=new NameInfoAdd();
 
-    @OneToOne(mappedBy = "searchInfo", fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
 
