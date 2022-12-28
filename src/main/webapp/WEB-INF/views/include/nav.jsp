@@ -28,13 +28,42 @@
         <sec:authorize access="isAuthenticated()">
           <li class="nav-item"><a href="/user/board/list?param=choice" class="nav-link link-light px-2"><sec:authentication property="principal.member.name"/>님의 찜 목록</a></li>
           <li class="nav-item"><a href="/user/board/list?param=recommend" class="nav-link link-light px-2"><sec:authentication property="principal.member.name"/>님 맞춤 추천</a></li>
-          <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">로그 아웃</a></li>
+          <li class="nav-item"><a id="logout" href="/logout" class="nav-link link-light px-2">로그 아웃</a></li>
+          <li class="nav-item"><a id="withdrawal" href="/user/withdrawal" class="nav-link link-light px-2">회원 탈퇴</a></li>
         </sec:authorize>
       </ul>
 
     </div>
   </div>
 </nav>
+
+<script>
+  function logout(){
+    let logout = document.getElementById('logout');
+
+    const stop=ev=>{
+      ev.preventDefault();
+      if (confirm("로그아웃 하시겠습니까?") == true) window.location.href="/logout";
+    }
+
+    logout.addEventListener('click',stop);
+  }
+  function withdrawal(){
+    let withdrawal = document.getElementById('withdrawal');
+
+    const stop=ev=>{
+      ev.preventDefault();
+      if (confirm("정말로 회원 탈퇴를 하시겠습니까?") == true) window.location.href="/user/withdrawal";
+    }
+
+    withdrawal.addEventListener('click',stop);
+  }
+
+  (function (){
+    logout();
+    withdrawal();
+  })();
+</script>
 
 
 

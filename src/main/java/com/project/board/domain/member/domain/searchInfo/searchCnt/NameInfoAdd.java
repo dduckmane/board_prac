@@ -19,20 +19,22 @@ public class NameInfoAdd implements AddCnt {
     @Override
     public Boolean support(String name) {
 
-        return name.equals("title");
+        return name.equals("title")||name.equals("all");
     }
 
     @Override
     public void addCnt(String title) {
-        getNameByBlank(title).stream().forEach(search->{
 
-            if(orderMap.isEmpty())orderMap.put(search,1);
-            orderMap.entrySet().stream().forEach(store->{
+        for (String name : getNameByBlank(title)) {
+            String duplication=null;
 
-                if(store.getKey().equals(search)) orderMap.put(search,orderMap.get(search)+1);
-                else orderMap.put(search,1);
-            });
-        });
+            duplication = orderMap.keySet().stream()
+                    .filter(key -> key.equals(name))
+                    .findFirst()
+                    .orElse(null);
+            //중복이 있다면 값을 증가 없다면 새로 추가
+            orderMap.put(name,duplication==null? 1: orderMap.get(name)+1);
+        }
     }
 
     public int getScore(String title){
@@ -42,7 +44,7 @@ public class NameInfoAdd implements AddCnt {
 
         for (String search : nameByBlank) {
             for (Map.Entry<String, Integer> entry : entries) {
-                if(entry.getKey().equals(search)) sum+= entry.getValue();
+                if(search.contains(entry.getKey())) sum+= entry.getValue();
             }
         }
         return sum;

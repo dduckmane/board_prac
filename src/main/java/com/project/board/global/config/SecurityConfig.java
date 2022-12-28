@@ -20,7 +20,6 @@ import org.springframework.security.web.firewall.HttpFirewall;
 @RequiredArgsConstructor
 public class SecurityConfig{
     private final PrincipalOauth2UserService userService;
-    private final CorsConfig corsConfig;
 
 
     @Bean//스프링 필터에 이 빈을 등록
@@ -28,7 +27,6 @@ public class SecurityConfig{
         httpSecurity.csrf().disable();
         httpSecurity
                 .logout()
-                .logoutSuccessUrl("/logoutHandler")
                 .and()
                 .authorizeRequests()
 

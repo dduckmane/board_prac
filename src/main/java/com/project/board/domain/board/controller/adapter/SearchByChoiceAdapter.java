@@ -2,12 +2,15 @@ package com.project.board.domain.board.controller.adapter;
 
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.repository.BoardRepositoryImpl;
-import com.project.board.domain.board.search.BoardSearchCondition;
+import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import static com.project.board.domain.board.boardConst.BoardConst.*;
+
 @RequiredArgsConstructor
+//찜 목록 관련 adapter
 public class SearchByChoiceAdapter implements findQueryAdapter{
 
     private final BoardRepositoryImpl boardRepository;
@@ -17,7 +20,7 @@ public class SearchByChoiceAdapter implements findQueryAdapter{
         if(!(param instanceof String)) return false;
 
         String changeParam = (String) param;
-        return changeParam.equals("choice");
+        return changeParam.equals(CHOICE);
     }
 
     @Override

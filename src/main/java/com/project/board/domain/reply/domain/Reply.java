@@ -30,16 +30,21 @@ public class Reply extends BaseEntity {
     public Reply(String replyText){
         this.replyText=replyText;
     }
-    public static Reply write(String replyText,Board board,Member member){
-        //이것도 싱글톤으로 바꿀수도
+    public static Reply write(
+            String replyText
+            ,Board board
+            ,Member member
+    ){
         Reply reply = new Reply();
+
         reply.replyText=replyText;
         reply.board=board;
         reply.member=member;
+
         board.getReplies().add(reply);
         member.getReplies().add(reply);
-        return reply;
 
+        return reply;
     }
     public void update(String replyText){
         this.replyText=replyText;

@@ -2,7 +2,6 @@ package com.project.board.domain.board.service;
 
 import com.project.board.domain.board.domain.Address;
 import com.project.board.domain.board.domain.Board;
-import com.project.board.domain.board.domain.BoardFiles;
 import com.project.board.domain.board.domain.UploadFile;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.Member;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @Service
@@ -34,25 +32,45 @@ public class BoardService {
             , String content
             , UploadFile thumbNail
             , Address address
-            , List<UploadFile>uploadFiles
             , int price
             , List<String> tag
-
     ){
-        List<BoardFiles> attachFiles = uploadFiles.stream().map(BoardFiles::new).collect(Collectors.toList());
-
         String renewTag="";
         for (String tagName : tag) { renewTag+=","+tagName;}
 
-        Board saveBoard = Board.write(member, groupId, title, content,thumbNail,address,attachFiles,price,renewTag);
+        Board saveBoard = Board.write(
+                member
+                , groupId
+                , title
+                , content
+                , thumbNail
+                , address
+                , price
+                , renewTag
+        );
         boardRepository.save(saveBoard);
     }
 
     @Transactional
-    public void update(Long boardId, String content) {
+    public void update(
+            Long boardId
+            , String title
+            , String content
+            , UploadFile thumbNail
+            , Address address
+            , int price
+            , List<String> tag
+
+    ){
         Board board = boardRepository.findById(boardId).orElseThrow();
-        board.update(content);
+
+        String renewTag="";
+        for (String tagName : tag) { renewTag+=","+tagName;}
+
+        board.update(title, content,thumbNail,address,price,renewTag);
     }
+
+
     @Transactional
     public void delete(Long boardId){
         Board board = boardRepository.findById(boardId).orElseThrow();
@@ -60,10 +78,14 @@ public class BoardService {
     }
     @Transactional
     public Optional<Board> findOne(Long boardId, HttpServletResponse response, HttpServletRequest request){
-        Board board = boardRepository.findById(boardId).orElseThrow();
+        Board board = boardRepository.findMemberById(boardId).orElseThrow();
 
         makeViewCount(board,response,request);
         return Optional.ofNullable(board);
+    }
+
+    public boolean checkMyself(Member member, Board board){
+        return board.checkMySelf(member.getUsername());
     }
 
     private void makeViewCount(Board board, HttpServletResponse response, HttpServletRequest request) {
@@ -77,4 +99,5 @@ public class BoardService {
             response.addCookie(cookie);
         }
     }
+
 }

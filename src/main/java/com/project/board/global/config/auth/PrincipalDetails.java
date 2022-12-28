@@ -15,11 +15,9 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
     private Member member;
     private Map<String,Object> attributes;
-    //일반 로그인
     public PrincipalDetails(Member member) {
         this.member = member;
     }
-    //Oauth로그인
     public PrincipalDetails(Member member,Map<String,Object>attributes) {
         this.member = member;
         this.attributes=attributes;
@@ -31,7 +29,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         return attributes;
     }
 
-    //해당 user의 권한을 리턴하는 곳
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect=new ArrayList<>();
@@ -71,11 +68,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     @Override
-    public boolean isEnabled() {
-        //우리 사이트에서 1년동안 로그인을 안하면 휴먼계정으로의 전환
-        //현재 시간-로그인 시간=1년이면 false
-        return true;
-    }
+    public boolean isEnabled() { return true;}
 
     @Override
     public String getName() {

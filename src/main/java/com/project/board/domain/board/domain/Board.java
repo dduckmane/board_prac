@@ -6,6 +6,7 @@ import com.project.board.domain.reply.domain.Reply;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,13 +20,13 @@ import java.util.List;
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id", nullable = false)
+    @Column(name = "board_id")
     private Long id;
     private String title;
     private String content;
     private int groupId;
     private Long viewCnt=0L;
-    @OneToMany(mappedBy = "board",orphanRemoval = true)
+    @OneToMany(mappedBy = "board",orphanRemoval = true,cascade = CascadeType.ALL)
     private List<Reply>replies=new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -38,13 +39,26 @@ public class Board extends BaseEntity {
     private int price;
 
     private String tagSum;
-    //첨부파일
-    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<BoardFiles>attachFiles;
-
 
     public Board(String title){
         this.title=title;
+    }
+
+    public void update(
+            String title
+            , String content
+            , UploadFile thumbNail
+            , Address address
+            , int price
+            , String renewTag
+    ) {
+        this.title=title;
+        this.content=content;
+        this.address=address;
+        this.price=price;
+        this.tagSum=renewTag;
+
+        if(thumbNail!=null) this.thumbNail=thumbNail;
     }
 
     public List<String> getTag(){
@@ -53,15 +67,6 @@ public class Board extends BaseEntity {
         }
         return new ArrayList<>();
     }
-    public void setMember(Member member) {
-        this.member = member;
-        member.getBoards().add(this);
-    }
-
-    public void setReplies(Reply reply) {
-        replies.add(reply);
-        reply.setBoard(this);
-    }
     public static Board write(
             Member member
             ,int groupId
@@ -69,7 +74,6 @@ public class Board extends BaseEntity {
             ,String content
             ,UploadFile thumbNail
             ,Address address
-            , List <BoardFiles> attachFiles
             , int price
             , String tag
     ){
@@ -84,27 +88,22 @@ public class Board extends BaseEntity {
         board.price=price;
         board.tagSum=tag;
 
-        member.getBoards().add(board);
-
-        board.attachFiles=attachFiles;
-        attachFiles.stream().forEach(boardFiles -> boardFiles.addBoard(board));
-
         return board;
-    }
-    public void update(String content){
-        this.content=content;
     }
 
     public String substringTitle() {
-        // 만약에 글제목이 5글자 이상이라면
-        // 5글자만 보여주고 나머지는 ...처리
+        // 만약에 글제목이 7글자 이상이라면
+        // 7글자만 보여주고 나머지는 ...처리
         String title = this.getTitle();
-        if (title.length() > 5) {
-            String subStr = title.substring(0, 5);
-            return subStr+"...";
+        if (title.length() > 12) {
+            String subStr = title.substring(0, 12);
+            return subStr+"..";
         } else {
             return title;
         }
+    }
+    public boolean checkMySelf(String username){
+        return member.getUsername().equals(username);
     }
     public Boolean checkNewArticle() {
         LocalDateTime newArticleDate = this.getCreatedDate().plusMinutes(5);

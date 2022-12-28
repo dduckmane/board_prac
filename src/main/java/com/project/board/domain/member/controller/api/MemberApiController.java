@@ -18,22 +18,17 @@ public class MemberApiController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
-    @PostMapping("/board")
+    @PostMapping("/choice")
     public void selectedBoard(
             @AuthenticationPrincipal PrincipalDetails principalDetails
             , @RequestBody ChoiceBoard choiceBoard
             ){
+
         memberService.choiceBoard(
                 choiceBoard.getBoardId()
                 , principalDetails.getMember());
-
-        Member member = memberRepository.findByUsername(principalDetails.getUsername()).orElseThrow();
-        List<Long> choiceBoard1 = member.getChoiceBoard();
-        for (Long aLong : choiceBoard1) {
-            System.out.println("aLong = " + aLong);
-        }
     }
-    @GetMapping("/board")
+    @GetMapping("/choice")
     public List<Long> findChoiceBoardId(
             @AuthenticationPrincipal PrincipalDetails principalDetails
     ){

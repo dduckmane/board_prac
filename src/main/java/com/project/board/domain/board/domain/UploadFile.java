@@ -30,14 +30,4 @@ public class UploadFile {
 
         return uploadFile;
     }
-
-    public static List<UploadFile> storeFiles(List<MultipartFile> multipartFiles,String uploadPath) {
-        List<UploadFile> storeFileResult = new ArrayList<>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.isEmpty()) {
-                storeFileResult.add(createUploadFile(multipartFile,uploadPath));
-            }
-        }
-        return storeFileResult;
-    }
 }

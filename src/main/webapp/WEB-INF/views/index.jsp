@@ -21,10 +21,9 @@
 
   <style>
     #image {
-      width: 250px;
-      height: 250px;
       object-fit: fill;
     }
+
   </style>
 
   <title>🍴Matjip</title>
@@ -63,17 +62,17 @@
       </div>
       <div id="slick-slide" class="sercives-body">
         <c:forEach var="item" items="${items}">
-          <div class="services-col mx-2 my-3">
-            <div class="card">
-              <div class="overlay d-flex flex-column justify-content-center align-items-center">
-                <h3>${item.name}</h3>
-                <p>조회수 ${item.viewCnt}</p>
+          <a href="/user/board/${item.itemId}">
+            <div class="services-col mx-2 my-3">
+              <div class="card" style="width: 35vh; height: 35vh;">
+                <div id="imageBox" class="overlay d-flex flex-column justify-content-center align-items-center">
+                  <h3>${item.name}</h3>
+                  <p>조회수 ${item.viewCnt}</p>
+                </div>
+                  <img id="image" src="/images?itemId=${item.itemId}" alt="" class="card-img-top img-thumbnail w-100 h-100">
               </div>
-              <a href="#">
-                <img id="image" src="/images?itemId=${item.itemId}" alt="" class="card-img-top" width="250px" height="250px">
-              </a>
             </div>
-          </div>
+          </a>
         </c:forEach>
       </div>
     </div>
@@ -90,86 +89,20 @@
       </div>
       <div class="row gallery-body">
 
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">서울</h2>
-              <a class="link-warning text-decoration-none" href="/user/board/list?param=Seoul">서울 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
+        <c:forEach var="region" items="${regions}">
 
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">경기</h2>
-              <a class="link-warning text-decoration-none" href="/user/board/list?param=gyeonggiDo">경기 맛집 리스트</a>
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+              <a href="/user/board/list?param=${region}">
+                <div class="card card-body border-0 p-0">
+                  <div data-id="${region}" class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
+                    <h2 class="gallery-title">${region.description}</h2>
+                    <h6>${region.description} 맛집 리스트</h6>
+                  </div>
+                </div>
+              </a>
             </div>
-          </div>
-        </div>
 
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">인천</h2>
-              <a class="link-warning text-decoration-none" href="/user/board/list?param=incheon">인천 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">강원도</h2>
-              <a class="link-warning text-decoration-none" href="#">강원도 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">경상북도</h2>
-              <a class="link-warning text-decoration-none" href="#">경상북도 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">경상남도</h2>
-              <a class="link-warning text-decoration-none" href="#">경상남도 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">전라북도</h2>
-              <a class="link-warning text-decoration-none" href="#">전라북도 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">전라남도</h2>
-              <a class="link-warning text-decoration-none" href="#">전라남도 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-          <div class="card card-body border-0 p-0">
-            <div class="overlay d-flex flex-column justify-content-center align-items-center h-100 w-100 border-2">
-              <h2 class="gallery-title">제주</h2>
-              <a class="link-warning text-decoration-none" href="#">제주 맛집 리스트</a>
-            </div>
-          </div>
-        </div>
+        </c:forEach>
 
       </div>
     </div>

@@ -16,17 +16,14 @@ import java.util.Optional;
 public class SpringSecurityAuditor implements AuditorAware<String>
 {
     @Override
-    public Optional<String> getCurrentAuditor()
-    {
+    public Optional<String> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (null == authentication || !authentication.isAuthenticated())
-        {
-            return null;
-        }
-        log.info("--------"+authentication.getPrincipal());
+        if (null == authentication || !authentication.isAuthenticated()) return null;
+
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         String name = principal.getMember().getName();
+
         return Optional.of(name);
     }
 }

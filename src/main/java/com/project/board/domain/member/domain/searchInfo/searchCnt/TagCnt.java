@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.project.board.domain.board.domain.boardenum.Tag.*;
 import static com.project.board.domain.member.domain.searchInfo.SearchInfo.TAG;
 import static com.project.board.global.util.OrderUtils.order;
 
@@ -16,10 +17,10 @@ import static com.project.board.global.util.OrderUtils.order;
 @Embeddable
 @Data
 public class TagCnt implements AddCnt {
-    private int atmosphere;
-    private int money;
-    private int reservation;
-    private int play;
+    private int tagOption1;
+    private int tagOption2;
+    private int tagOption3;
+    private int tagOption4;
     @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
@@ -29,19 +30,18 @@ public class TagCnt implements AddCnt {
     }
     @Override
     public void addCnt(String tag) {
-
-        if(tag.contains("atmosphere")) atmosphere++;
-        else if(tag.contains("money")) money++;
-        else if(tag.contains("reservation")) reservation++;
-        else play++;
+        if(tag.contains(MOOD.toString())) tagOption1++;
+        if(tag.contains(PRICE.toString())) tagOption2++;
+        if(tag.contains(RESERVATION.toString())) tagOption3++;
+        if(tag.contains(PLAY.toString())) tagOption4++;
     }
     public int getScore(String tag){
 
         String[] orders ={
-                Integer.toString(atmosphere)+"atmosphere"
-                ,Integer.toString(money)+"money"
-                ,Integer.toString(reservation)+"reservation"
-                ,Integer.toString(play)+"play"
+                Integer.toString(tagOption1)+"tagOption1"
+                ,Integer.toString(tagOption2)+"tagOption2"
+                ,Integer.toString(tagOption3)+"tagOption3"
+                ,Integer.toString(tagOption4)+"tagOption4"
                 ,"0"
         };
 
@@ -51,13 +51,13 @@ public class TagCnt implements AddCnt {
         return getScoreByGroupId(tag);
     }
 
-    private Integer getScoreByGroupId(String tag) {
+    private Integer getScoreByGroupId(String tagSum) {
         int sum=0;
 
-        if(tag.contains("atmosphere"))  sum+=orderMap.get("atmosphere");
-        if(tag.equals("money")) sum+= orderMap.get("money");
-        if(tag.equals("reservation")) sum+= orderMap.get("reservation");
-        if(tag.equals("play")) sum+= orderMap.get("play");
+        if(tagSum.contains(MOOD.toString()))  sum+=orderMap.get("tagOption1");
+        if(tagSum.contains(PRICE.toString())) sum+= orderMap.get("tagOption2");
+        if(tagSum.contains(RESERVATION.toString())) sum+= orderMap.get("tagOption3");
+        if(tagSum.contains(PLAY.toString())) sum+= orderMap.get("tagOption4");
 
         return sum;
     }
