@@ -23,8 +23,10 @@ public class MemberService {
     private final BoardService boardService;
     //찜 기능 구현
     public void choiceBoard(Long boardId, Member member) {
-        Member findMember = memberRepository.findByUsername(member.getUsername()).orElseThrow();
-        findMember.choiceBoard(boardId);
+        memberRepository
+                .findByUsername(member.getUsername())
+                .orElseThrow()
+                .choiceBoard(boardId);
     }
 
     //정보를 수집

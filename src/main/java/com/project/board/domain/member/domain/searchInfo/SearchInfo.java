@@ -53,15 +53,16 @@ public class SearchInfo {
 
     public void addCnt(Member member, String type, String param){
         if (type.equals("sort")||type.equals("name")) return;
-        // 각 카테고리 별로 검색한 횟 수를 가져온다.
+        // 각 카테고리 별로 검색한 횟 수 와 내용을 저장한다.
         // adapter 패턴의 변형
         // type 바탕으로 type 에 맞는 handler 를 가져온다.
         findAddCntHandler(type).addCnt(param);
+        //수정된 addCnt 로 다시 바꾼다.
         member.addSearchInfo(this);
     }
 
 
-    AddCnt findAddCntHandler(String name){
+    AddCnt findAddCntHandler(String type){
         List<AddCnt> info =new ArrayList<>();
 
         info.add(priceCnt);
@@ -71,7 +72,7 @@ public class SearchInfo {
         info.add(nameInfoAdd);
 
         return info.stream()
-                .filter(addCnt -> addCnt.support(name))
+                .filter(addCnt -> addCnt.support(type))
                 .findFirst()
                 .orElseThrow(()->new IllegalArgumentException());
     }
