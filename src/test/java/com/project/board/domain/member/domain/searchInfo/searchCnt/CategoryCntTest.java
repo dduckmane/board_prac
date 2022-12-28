@@ -1,11 +1,8 @@
 package com.project.board.domain.member.domain.searchInfo.searchCnt;
 
 import com.project.board.domain.board.domain.Board;
-import com.project.board.domain.board.domain.boardenum.Category;
-import com.project.board.domain.board.domain.boardenum.Regions;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
-import com.project.board.global.testInit.MemberTestInit;
-import org.assertj.core.api.Assertions;
+import com.project.board.global.testInit.TestInit;
 import org.junit.jupiter.api.*;
 
 import static com.project.board.domain.board.domain.boardenum.Category.*;
@@ -13,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class CategoryCntTest extends MemberTestInit {
+class CategoryCntTest extends TestInit {
     CategoryCnt categoryCnt = new CategoryCnt();
 
     @Test
