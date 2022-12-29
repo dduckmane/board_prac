@@ -5,9 +5,7 @@
 <html lang="en">
 
 <head>
-
 <%@ include file="./include/static-head.jsp" %>
-
 <%--  slick--%>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
         integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
@@ -19,13 +17,6 @@
 <%--  custom css--%>
   <link rel="stylesheet" href="css/app.css">
 
-  <style>
-    #image {
-      object-fit: fill;
-    }
-
-  </style>
-
   <title>🍴Matjip</title>
 </head>
 
@@ -34,7 +25,6 @@
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
 
 <div class="b-example-divider"></div>
-
 
 <section id="top">
   <div class="section-content overlay d-flex justify-content-center align-items-center">
@@ -113,7 +103,7 @@
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <%--footer--%>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js" integrity="sha512-6ORWJX/LrnSjBzwefdNUyLCMTIsGoNP6NftMy2UAm1JBm6PRZCO1d7OHBStWpVFZLO+RerTvqX/Z9mBFfCJZ4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js" intFwegrity="sha512-6ORWJX/LrnSjBzwefdNUyLCMTIsGoNP6NftMy2UAm1JBm6PRZCO1d7OHBStWpVFZLO+RerTvqX/Z9mBFfCJZ4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
         integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

@@ -3,22 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <%@ include file="./include/static-head.jsp" %>
   <%--  custom css--%>
   <link rel="stylesheet" href="css/loginForm.css">
   <title>🍴Matjip</title>
-    <style>
-        #naver {
-            width: 330px;
-            height: 65px;
-        }
-        .divider {
-            width: 20%;
-            margin: 10px 1rem 7rem;
-            border-top: 0.5rem solid rgb(176, 255, 189);
-        }
-    </style>
 </head>
 
 <body>
@@ -27,15 +15,17 @@
 
 
 <section id="top">
-  <div class="section-content overlay d-flex justify-content-center align-items-center">
-    <div class="container-xxl">
-      <div class="row align-items-center">
-        <div class="col-md-9 welcome main-title">
-          <h1 class="welcome-title fw-light">&nbsp 로그인 페이지 입니다. </h1>
+
+      <div class="section-content overlay d-flex justify-content-center align-items-center">
+        <div class="container-xxl">
+          <div class="row align-items-center">
+            <div class="col-md-9 welcome main-title">
+              <h1 class="welcome-title fw-light">&nbsp 로그인 페이지 입니다. </h1>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+
 </section>
 
 <div style="padding: 3rem 3rem;"></div>

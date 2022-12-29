@@ -95,3 +95,7 @@ h3,
     color: grey;
     font-size: 0.9rem;
 }
+.error {
+    color: #ef0505;
+    font-size: 0.9rem;
+}

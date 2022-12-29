@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,12 +10,6 @@
     <%@ include file="../include/static-head.jsp" %>
     <link rel="stylesheet" href="/css/boardWrite.css">
     <title>🍴Matjip</title>
-    <style>
-        .error {
-            color: #ef0505;
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -43,7 +37,7 @@
 </section>
 
 
-<div style = "padding: 3rem 3rem;"></div>
+<div style="padding: 3rem 3rem;"></div>
 
 <form action="/user/board/save/${groupId}" method="post" enctype="multipart/form-data">
 
@@ -57,7 +51,9 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
-                <input id="title" onkeyup="titleValidation()" type="text" name="title" value="${boardSaveForm.title}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input id="title" onkeyup="titleValidation()" type="text" name="title" value="${boardSaveForm.title}"
+                       class="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-default">
             </div>
             <p id="errorFieldTitle" class="pe-3 error" style="display:none;">제목은 최소 2글자이상 50글자 미만입니다.</p>
 
@@ -66,7 +62,8 @@
                 <label class="input-group-text" for="inputGroupSelect04">대표 지역</label>
 
                 <input type="hidden" id="region" value="${boardSaveForm.representativeArea}">
-                <select class="form-select" name="representativeArea" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <select class="form-select" name="representativeArea" id="inputGroupSelect04"
+                        aria-label="Example select with button addon">
 
                     <c:forEach var="region" items="${regions}">
                         <option id="${region}" value=${region}>${region.description}</option>
@@ -78,10 +75,11 @@
                 <label class="btn btn-outline-secondary" for="option">태그설정</label>
 
                 <c:forEach var="tag" varStatus="status" items="${tags}">
-                    <input type="checkbox" class="btn-check tag"  name="tag" value=${tag} <c:if test="${fn:contains(boardSaveForm.tag,tag)}">checked</c:if> id=${status.index}>
+                    <input type="checkbox" class="btn-check tag" name="tag"
+                           value=${tag} <c:if test="${fn:contains(boardSaveForm.tag,tag)}">checked</c:if>
+                           id=${status.index}>
                     <label class="btn btn-outline-secondary" for=${status.index}>${tag.description}</label>
                 </c:forEach>
-
 
 
             </div>
@@ -89,20 +87,25 @@
 
             <div class="input-group">
                 <button type="button" class="btn btn-outline-secondary" style="color: black">가격 설정</button>
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <input type="range" value="${boardSaveForm.price}" min="0" max="100000" step="1000" class="slider" id="myRange">
+                    <input type="range" value="${boardSaveForm.price}" min="0" max="100000" step="1000" class="slider"
+                           id="myRange">
                 </ul>
-                <input id="value" name="price" type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+                <input id="value" name="price" type="text" class="form-control"
+                       aria-label="Text input with segmented dropdown button">
             </div>
             <p class="explain ps-2"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default2">상세 위치</span>
-                <input id="location" value="${boardSaveForm.detailArea}" onkeyup='printLocation()' type="text" name="detailArea" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"
-                placeholder="주소로 검색 ex) 제주특별자치도 제주시 첨단로 242"
+                <input id="location" value="${boardSaveForm.detailArea}" onkeyup='printLocation()' type="text"
+                       name="detailArea" class="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-default2"
+                       placeholder="주소로 검색 ex) 제주특별자치도 제주시 첨단로 242"
                 >
             </div>
             <p id="errorFieldRegion" class="pe-3 error">상세 위치를 입력해주세요</p>
@@ -117,36 +120,37 @@
 </form>
 <%--</spring:hasBindErrors>--%>
 
-<div style = "padding: 3rem 3rem;"></div>
+<div style="padding: 3rem 3rem;"></div>
 
 <!-- footer 시작 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <!-- footer 종료 -->
 
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
-    CKEDITOR.replace('content',
-            {
-              filebrowserUploadUrl:'/food/imageUpload.do'
-            });
+<script type="text/javascript">    // 글쓰기 editor 및 사진 업로드 기능
+CKEDITOR.replace('content',
+    {
+        filebrowserUploadUrl: '/food/imageUpload.do'
+    });
 </script>
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=33596d28073e490ff8a0bf0fd3c448fb&libraries=services"></script>
+<script type="text/javascript"
+        src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=33596d28073e490ff8a0bf0fd3c448fb&libraries=services"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-    let locationInfo=null;
+    let locationInfo = null;
 
-    function validLocation(){
+    function validLocation() {
         locationInfo = document.getElementById('location').value;
 
         return !(locationInfo.length >= 1 && locationInfo.length <= 3);
     }
 
-    function printLocation()  {
+    function printLocation() {
         let error = document.getElementById('errorFieldRegion');
 
-        validLocation() ? error.style.display='none': error.style.display='block';
+        validLocation() ? error.style.display = 'none' : error.style.display = 'block';
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
@@ -161,7 +165,7 @@
         var geocoder = new kakao.maps.services.Geocoder();
 
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch(locationInfo, function(result, status) {
+        geocoder.addressSearch(locationInfo, function (result, status) {
 
             // 정상적으로 검색이 완료됐으면
             if (status === kakao.maps.services.Status.OK) {
@@ -186,30 +190,32 @@
         });
 
     }
-    function slider(){
+
+    function slider() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("value");
         output.value = slider.value;
 
-        slider.oninput = function() {
+        slider.oninput = function () {
             output.value = this.value;
         }
     }
 
-    function checkTitle(){
+    function checkTitle() {
         let title = document.getElementById('title').value.length;
 
-        return title>1&&title<50;
+        return title > 1 && title < 50;
     }
-    function titleValidation(){
+
+    function titleValidation() {
         let errorTitle = document.getElementById('errorFieldTitle');
-        errorTitle.style.display='block';
+        errorTitle.style.display = 'block';
 
 
-        if(checkTitle()) errorTitle.style.display='none';
+        if (checkTitle()) errorTitle.style.display = 'none';
     }
 
-    function error(){
+    function error() {
         let errorTag = document.getElementById('errorTag').textContent;
         let errorPhoto = document.getElementById('errorPhoto').textContent;
         let errorTitle = document.getElementById('errorTitle').textContent;
@@ -217,58 +223,61 @@
 
         let errors
             = new Array(errorTag, errorPhoto, errorTitle, errorRegion)
-            .filter(value => value!=='');
-        if(errors.length==0) return;
-        let errorMessage=errors[0];
+            .filter(value => value !== '');
+        if (errors.length == 0) return;
+        let errorMessage = errors[0];
 
-        for (let i = 1; i <errors.length ; i++) {
-            errorMessage+="\n"+errors[i];
+        for (let i = 1; i < errors.length; i++) {
+            errorMessage += "\n" + errors[i];
         }
         alert(errorMessage);
     }
-    function checkRegion(){
+
+    function checkRegion() {
         let region = document.getElementById('region');
         let regionTag = document.getElementById(region.value);
 
-        regionTag.selected=true;
+        regionTag.selected = true;
     }
-    function validTag(){
+
+    function validTag() {
         let tagList = [...(document.querySelectorAll('.tag'))];
 
-        let valid=false;
+        let valid = false;
         for (let tag of tagList) {
-            if(tag.checked) valid=true;
+            if (tag.checked) valid = true;
         }
         return valid;
 
     }
-    function allValidation(){
 
-        const allValidation=ev=>{
-            let validTitle= checkTitle();
-            let validationLocation=validLocation();
+    function allValidation() {
+
+        const allValidation = ev => {
+            let validTitle = checkTitle();
+            let validationLocation = validLocation();
             let tag = validTag();
-            let titleNotEmpty= document.getElementById('title').value.length!=0;
-            let locationNotEmpty= document.getElementById('location').value.length != 0;
-            let validThumbNail = document.getElementById('formFile').value.length!= 0;
+            let titleNotEmpty = document.getElementById('title').value.length != 0;
+            let locationNotEmpty = document.getElementById('location').value.length != 0;
+            let validThumbNail = document.getElementById('formFile').value.length != 0;
 
-            if(!(validThumbNail&&tag&&validTitle&&titleNotEmpty&&validationLocation&&locationNotEmpty)){
+            if (!(validThumbNail && tag && validTitle && titleNotEmpty && validationLocation && locationNotEmpty)) {
                 ev.preventDefault();
 
-                let errormessage='';
-                if(!validThumbNail) errormessage+="썸네일은 필수 입니다."+'\n';
-                if(!validTitle) errormessage+="제목은 2글자에서 50글자 사이입니다."+'\n';
-                if(!titleNotEmpty) errormessage+="제목은 필수 값입니다."+'\n';
-                if(!validationLocation) errormessage+="상세 위치를 자세히 작성해야합니다."+'\n';
-                if(!locationNotEmpty) errormessage+="상세위치를 작성해야 합니다.";
-                if(!tag) errormessage+="테그를 하나이상 설정 해야합니다."+'\n';
+                let errormessage = '';
+                if (!validThumbNail) errormessage += "썸네일은 필수 입니다." + '\n';
+                if (!validTitle) errormessage += "제목은 2글자에서 50글자 사이입니다." + '\n';
+                if (!titleNotEmpty) errormessage += "제목은 필수 값입니다." + '\n';
+                if (!validationLocation) errormessage += "상세 위치를 자세히 작성해야합니다." + '\n';
+                if (!locationNotEmpty) errormessage += "상세위치를 작성해야 합니다.";
+                if (!tag) errormessage += "테그를 하나이상 설정 해야합니다." + '\n';
 
                 alert(errormessage)
             }
         }
         let button = document.getElementById('subButton');
 
-        button.addEventListener('click',allValidation);
+        button.addEventListener('click', allValidation);
 
     }
 
