@@ -56,7 +56,7 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
             int totalScore = searchInfo.getTotalScore(board);
 
             //환산한 board 의 점수와 board 를 list 에 담음
-            if(totalScore!=0) recommendListDtos.add(new RecommendListDto(totalScore,board));
+            if(totalScore>=2) recommendListDtos.add(new RecommendListDto(totalScore,board));
         });
         // 점수 바탕으로 정렬
         Collections.sort(recommendListDtos);
