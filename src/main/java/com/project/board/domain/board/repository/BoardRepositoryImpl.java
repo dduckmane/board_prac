@@ -2,6 +2,7 @@ package com.project.board.domain.board.repository;
 
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
+import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.domain.searchInfo.QSearchInfo;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -69,7 +70,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     public Page<Board> searchByRegions(String regions, BoardSearchCondition searchCondition, Pageable pageable) {
 
         List<Board> result = queryFactory
-                .select(board).distinct()
+                .select(board)
                 .from(board)
                 .join(board.member,member).fetchJoin()
                 .where(
@@ -78,7 +79,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
-                        , board.address.representativeArea.eq(regions)
+                        , board.address.representativeArea.like(regions)
                 )
                 .orderBy(boardSort(pageable))
                 .offset(pageable.getOffset())
@@ -86,7 +87,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                 .fetch()
                 ;
         JPAQuery<Long> CountQuery = queryFactory
-                .select(board.count()).distinct()
+                .select(board.count())
                 .from(board)
                 .join(board.member,member)
                 .where(
@@ -94,7 +95,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
-                        , board.address.representativeArea.eq(regions)
+                        , board.address.representativeArea.like(regions)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -105,10 +106,9 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     @Override
     public Page<Board> searchAll(BoardSearchCondition searchCondition, Pageable pageable) {
         List<Board> result = queryFactory
-                .select(board).distinct()
+                .select(board)
                 .from(board)
                 .join(board.member,member).fetchJoin()
-                .join(member.searchInfo,searchInfo).fetchJoin()
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
@@ -122,7 +122,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                 .fetch()
                 ;
         JPAQuery<Long> CountQuery = queryFactory
-                .select(board.count()).distinct()
+                .select(board.count())
                 .from(board)
                 .join(board.member,member)
                 .where(
@@ -138,10 +138,10 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
     @Override
-    public Page<Board> searchByChoice(BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> searchByChoice(Member user, BoardSearchCondition searchCondition, Pageable pageable) {
 
         List<Board> result = queryFactory
-                .select(board).distinct()
+                .select(board)
                 .from(board)
                 .join(board.member,member).fetchJoin()
                 .where(
@@ -150,6 +150,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
+                        , member.id.eq(user.getId())
                         , board.id.in(member.choiceBoard)
                 )
                 .orderBy(boardSort(pageable))
@@ -158,7 +159,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                 .fetch()
                 ;
         JPAQuery<Long> CountQuery = queryFactory
-                .select(board.count()).distinct()
+                .select(board.count())
                 .from(board)
                 .join(board.member,member)
                 .where(
@@ -166,6 +167,8 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                        , member.id.eq(user.getId())
                         , board.id.in(member.choiceBoard)
                 )
                 .offset(pageable.getOffset())

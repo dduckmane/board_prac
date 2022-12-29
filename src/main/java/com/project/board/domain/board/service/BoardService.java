@@ -25,7 +25,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public void save(
+    public Long save(
             Member member
             , int groupId
             , String title
@@ -48,7 +48,8 @@ public class BoardService {
                 , price
                 , renewTag
         );
-        boardRepository.save(saveBoard);
+        Board board = boardRepository.save(saveBoard);
+        return board.getId();
     }
 
     @Transactional
