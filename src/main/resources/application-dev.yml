@@ -18,10 +18,8 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        #        show_sql: true
         format_sql: true
         default_batch_fetch_size: 1000 #최적화 옵션
-  #    open-in-view: false
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -50,7 +48,6 @@ spring:
             scope:
               - name
               - email
-            #              - profile-image 되는 데 지금은 사용안함
 
             client-name: Naver
             authorization-grant-type: authorization_code
@@ -79,7 +76,7 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 logging.level:
-  org.hibernate.SQL: debug
+  org.hibernate.SQL: error
 #  org.hibernate.type: trace
 custom:
   upload:
