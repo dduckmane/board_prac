@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -188,6 +190,13 @@
 
 <!-- 리스트 시작 -->
 <section id="boardList">
+    <c:if test="${Param eq 'recommend'}">
+        <c:if test="${fn:length(BoardDtoList)==0}">
+            <div class="container">
+                <h3 class="fw-lighter">😭 회원님의 검색이나 필터 사용을 통해 수집된 정보가 부족하여 아직 추천을 드리지 못합니다 😭</h3>
+            </div>
+        </c:if>
+    </c:if>
     <div class="row">
         <c:forEach var="item" varStatus="status" items="${BoardDtoList}">
             <div class="col-md-3 col-sm-6 p-0">

@@ -111,7 +111,7 @@
             <p id="errorFieldRegion" class="pe-3 error">상세 위치를 입력해주세요</p>
             <div id="map" class="mb-3" style="width:100%;height:350px;"></div>
 
-            <textarea id="content" name="content">${boardSaveForm.content}</textarea>
+            <textarea id="content" name="content"> * 이 설명은 보고 지워주세요 * 1. 사진 모양을 클릭한다. 2. 업로드 버튼을 누른다. 3. 파일 선택에서 사진을 고른다. 4. 서버로 전송 버튼을 누른다. 5. 크기를 조절한다. 6. 확인버튼을 누른다.${boardSaveForm.content}</textarea>
 
             <button id="subButton" type="submit" class="btn btn-primary">글등록</button>
         </div>
