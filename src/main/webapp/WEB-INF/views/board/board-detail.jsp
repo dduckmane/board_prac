@@ -7,33 +7,26 @@
 <head>
     <%@ include file="../include/static-head.jsp" %>
     <link rel="stylesheet" href="/css/boardDetail.css">
-    <style>
-        .divider {
-            width: 10%;
-            margin: 2rem auto;
-            border-top: 0.5rem solid rgb(248, 226, 59);
-        }
-    </style>
 </head>
 <body>
 
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
 
-<div class="wrap">
-    <section id="top">
-        <div class="section-content overlay d-flex justify-content-center align-items-center">
-            <div class="container-xxl">
-                <div class="row align-items-center">
-                    <div class="col-md-9 welcome main-title">
-                        <h1 class="welcome-title fw-light">&nbsp Matjip의 ${boardDetailsDto.id}번 게시물 입니다</h1>
-                    </div>
+<section id="top">
+    <div class="section-content overlay d-flex justify-content-center align-items-center">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="col-md-9 welcome main-title">
+                    <h1 class="welcome-title fw-light">&nbsp Matjip의 ${boardDetailsDto.id}번 게시물 입니다</h1>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div style="padding: 3rem 3rem;"></div>
+<div style="padding: 3rem 3rem;"></div>
 
+<section id="buttonSection">
     <div class="d-flex justify-content-center align-items-center">
         <div class="containerCustom">
             <div class="text-area">
@@ -51,51 +44,58 @@
                     </c:if>
                 </div>
 
-                    <div class="input-group my-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default1">제목</span>
-                        <input type="text" value="${boardDetailsDto.title}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default1" disabled>
-                    </div>
+                <div class="input-group my-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default1">제목</span>
+                    <input type="text" value="${boardDetailsDto.title}" class="form-control"
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default1" disabled>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-6 pe-0">
-                            <div class="input-group">
-                                <span class="input-group-text" id="inputGroup-sizing-default2">가격</span>
-                                <input type="text" value="${boardDetailsDto.price}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6 p-0 mt-md-0 mt-3">
-
-                            <div class="input-group">
-                                <input type="radio" class="btn-check" name="options" id="option" disabled>
-                                <label class="btn btn-outline-secondary w-20" for="option">태그설정</label>
-
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'MOOD')}" > checked</c:if> id="option1" disabled>
-                                <label class="btn btn-outline-secondary w-20" for="option1">분위기</label>
-
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PRICE')}" > checked</c:if> id="option2" disabled>
-                                <label class="btn btn-outline-secondary w-20" for="option2">가성비</label>
-
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'RESERVATION')}" > checked</c:if> id="option3" disabled>
-                                <label class="btn btn-outline-secondary w-20" for="option3">예약 가능</label>
-
-                                <input type="checkbox" class="btn-check" <c:if test="${fn:contains(boardDetailsDto.tag, 'PLAY')}" > checked</c:if> id="option4" disabled>
-                                <label class="btn btn-outline-secondary w-20" for="option4">놀기좋은</label>
-                            </div>
+                <div class="row">
+                    <div class="col-md-6 pe-0">
+                        <div class="input-group">
+                            <span class="input-group-text" id="inputGroup-sizing-default2">가격</span>
+                            <input type="text" value="${boardDetailsDto.price}" class="form-control"
+                                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" disabled>
                         </div>
                     </div>
+                    <div class="col-md-6 p-0 mt-md-0 mt-3">
 
-                    <%--위치 버튼--%>
-                        <div class="input-group mt-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default3">위치</span>
-                            <input type="text" id="location" class="form-control" value="${boardDetailsDto.detailArea}"
-                                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default3" disabled>
+                        <div class="input-group">
+                            <input type="radio" class="btn-check" name="options" id="option" disabled>
+                            <label class="btn btn-outline-secondary w-20" for="option">태그설정</label>
+
+                            <input type="checkbox" class="btn-check"
+                            <c:if test="${fn:contains(boardDetailsDto.tag, 'MOOD')}"> checked</c:if> id="option1" disabled>
+                            <label class="btn btn-outline-secondary w-20" for="option1">분위기</label>
+
+                            <input type="checkbox" class="btn-check"
+                            <c:if test="${fn:contains(boardDetailsDto.tag, 'PRICE')}"> checked</c:if> id="option2" disabled>
+                            <label class="btn btn-outline-secondary w-20" for="option2">가성비</label>
+
+                            <input type="checkbox" class="btn-check"
+                            <c:if test="${fn:contains(boardDetailsDto.tag, 'RESERVATION')}"> checked</c:if> id="option3"
+                                   disabled>
+                            <label class="btn btn-outline-secondary w-20" for="option3">예약 가능</label>
+
+                            <input type="checkbox" class="btn-check"
+                            <c:if test="${fn:contains(boardDetailsDto.tag, 'PLAY')}"> checked</c:if> id="option4" disabled>
+                            <label class="btn btn-outline-secondary w-20" for="option4">놀기좋은</label>
                         </div>
-                    <div id="map" class="mb-3" style="width:100%;height:200px;"></div>
+                    </div>
+                </div>
+
+                <%--위치 버튼--%>
+                <div class="input-group mt-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default3">위치</span>
+                    <input type="text" id="location" class="form-control" value="${boardDetailsDto.detailArea}"
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default3" disabled>
+                </div>
+                <div id="map" class="mb-3" style="width:100%;height:200px;"></div>
                 <%--    content 영역--%>
                 <div class="d-flex justify-content-center align-items-center">
                     <h2>REVIEW</h2>
                 </div>
-                    <div class="divider"></div>
+                <div class="divider"></div>
                 <div>
                     ${boardDetailsDto.content}
                 </div>
@@ -103,7 +103,8 @@
 
         </div>
     </div>
-</div>
+</section>
+
 
 <div class="content-container">
     <!-- 댓글 영역 -->
@@ -190,9 +191,9 @@
 
     <!-- end replyModifyModal -->
 </div>
-</div>
 <%@ include file="../include/footer.jsp" %>
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=33596d28073e490ff8a0bf0fd3c448fb&libraries=services"></script>
+<script type="text/javascript"
+        src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=33596d28073e490ff8a0bf0fd3c448fb&libraries=services"></script>
 <script>
 
     locationInfo = document.getElementById('location').value;
@@ -210,7 +211,7 @@
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(locationInfo, function(result, status) {
+    geocoder.addressSearch(locationInfo, function (result, status) {
 
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
@@ -238,44 +239,8 @@
 <script>
     //원본 글 번호
     const bno = '${boardDetailsDto.id}';
-    console.log('bno:', bno);
     // 댓글 요청 URL
     const URL = '/api/reply';
-
-    //날짜 포맷 변환 함수
-    function formatDate(datetime) {
-        //문자열 날짜 데이터를 날짜객체로 변환
-        const dateObj = new Date(datetime);
-        // console.log(dateObj);
-        //날짜객체를 통해 각 날짜 정보 얻기
-        let year = dateObj.getFullYear();
-        //1월이 0으로 설정되어있음.
-        let month = dateObj.getMonth() + 1;
-        let day = dateObj.getDate();
-        let hour = dateObj.getHours();
-        let minute = dateObj.getMinutes();
-        //오전, 오후 시간체크
-        let ampm = '';
-        if (hour < 12 && hour >= 6) {
-            ampm = '오전';
-        } else if (hour >= 12 && hour < 21) {
-            ampm = '오후';
-            if (hour !== 12) {
-                hour -= 12;
-            }
-        } else if (hour >= 21 && hour <= 24) {
-            ampm = '밤';
-            hour -= 12;
-        } else {
-            ampm = '새벽';
-        }
-        //숫자가 1자리일 경우 2자리로 변환
-        (month < 10) ? month = '0' + month : month;
-        (day < 10) ? day = '0' + day : day;
-        (hour < 10) ? hour = '0' + hour : hour;
-        (minute < 10) ? minute = '0' + minute : minute;
-        return year + "-" + month + "-" + day + " " + ampm + " " + hour + ":" + minute;
-    }
 
     // 댓글 페이지 태그 생성 렌더링 함수
     function makePageDOM(nowPage, endPage, startPage, first, last, totalPages) {
