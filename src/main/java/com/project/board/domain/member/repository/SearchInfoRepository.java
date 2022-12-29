@@ -13,4 +13,7 @@ public interface SearchInfoRepository extends JpaRepository<SearchInfo,Long> {
     @EntityGraph(attributePaths = {"member"})
     Optional<SearchInfo> findByMember(Member member);
 
+    Optional<SearchInfo> findSearchInfoByMember(Member member);
+
+
 }

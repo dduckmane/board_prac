@@ -15,6 +15,7 @@ import com.project.board.domain.board.controller.request.BoardUpdateForm;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.service.BoardService;
+import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.service.MemberService;
 import com.project.board.global.page.PageMaker;
 import com.project.board.global.config.auth.PrincipalDetails;
@@ -76,7 +77,12 @@ public class BoardController {
             , Model model
     ) {
         Page<BoardDto> result = adapterHandler
-                .service(listParam.getParam(), searchCondition, pageable)
+                .service(
+                        listParam.getParam()
+                        , principalDetails.getMember()
+                        , searchCondition
+                        , pageable
+                )
                 .map(BoardDto::new);
 
         memberService.collectInfo(principalDetails.getMember(), listParam, searchCondition);
