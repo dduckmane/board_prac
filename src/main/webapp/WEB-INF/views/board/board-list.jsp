@@ -243,9 +243,7 @@
 <!-- footer 종료 -->
 
 <script>
-
     function showImage() {
-
         const $thumbList = document.querySelectorAll('img[data-item-id]');
         for (let $thumb of [...$thumbList]) {
             let itemId = $thumb.dataset.itemId;
@@ -257,23 +255,17 @@
                 });
         }
     }
-
     function searchCondition() {
         let select = document.getElementById('inputGroupSelect');
         let condition1 = select.options[select.selectedIndex].value;
-
         let filterInput = document.getElementById('filterInput');
         filterInput.name = condition1;
     }
-
     function choiceBoard() {
         let choices = document.querySelectorAll('#boardList .btn-check');
-
         for (let choice of [...choices]) {
             choice.addEventListener("click", e => {
-
                 console.log(choice.id)
-
                 const choiceData = {
                     boardId: choice.id
                 }
@@ -281,17 +273,13 @@
                     method: 'POST'
                     , headers: {
                         'content-type': 'application/json'
-
                     }
                     , body: JSON.stringify(choiceData)
-
                 }
                 fetch('/user/choice', reqInfo);
             })
         }
-
     }
-
     function checkedChoiceButton() {
         fetch('/user/choice')
             .then(res => res.json())
@@ -302,12 +290,9 @@
                 }
             })
     }
-
     function setPageUrl() {
         const url = document.location.href;
-
         let pageList = document.querySelectorAll('.pageList');
-
         //페이지 링크 걸기
         for (let page of [...pageList]) {
             let id = page.dataset.id;
@@ -316,21 +301,17 @@
             } else {
                 let index = url.indexOf('page');
                 let originUrl = url.substring(0, index - 1);
-
                 page.href = originUrl + "&page=" + id;
             }
         }
         //이전 페이지 링크 걸기
         let prevPage = document.getElementById('prevPage');
-
         if (prevPage != null) {
             let lastIndex = url.lastIndexOf('=');
             let prevUrl = url.substring(0, lastIndex + 1);
             let number = Number(url.substring(lastIndex + 1));
             prevPage.href = prevUrl + (number - 1);
-
         }
-
         //다음 페이지링크 걸기
         let postPage = document.getElementById('postPage');
         if (!url.includes('page')) {
@@ -342,14 +323,11 @@
             postPage.href = postUrl + (number + 1);
         }
     }
-
-
     (function () {
         choiceBoard();
         showImage();
         checkedChoiceButton();
         setPageUrl();
-
     })();
 </script>
 </body>

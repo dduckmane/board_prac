@@ -12,6 +12,9 @@ h3,
 .title {
     font-family: 'Noto Sans KR', sans-serif;
 }
+.btn:hover {
+    background: none; !important;
+}
 
 #top {
 
