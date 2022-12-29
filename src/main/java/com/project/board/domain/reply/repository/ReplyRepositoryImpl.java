@@ -36,6 +36,8 @@ public class ReplyRepositoryImpl implements ReplyRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(reply.count())
                 .where(board.id.eq(boardId))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .from(reply);
 
         return PageableExecutionUtils.getPage(results,pageable,CountQuery::fetchOne);

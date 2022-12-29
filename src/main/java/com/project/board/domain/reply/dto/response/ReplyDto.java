@@ -11,6 +11,7 @@ public class ReplyDto {
     private String replyText;
     private String replyWriter;
     private String createDate;
+    private String username;
 
     public ReplyDto(Reply reply) {
 
@@ -24,5 +25,7 @@ public class ReplyDto {
         this.createDate = reply
                 .getCreatedDate()
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        this.username = reply.getMember().getUsername();
     }
 }

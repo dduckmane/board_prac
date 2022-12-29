@@ -50,4 +50,8 @@ public class Reply extends BaseEntity {
         this.replyText=replyText;
     }
 
+    public boolean checkMySelf(Member member) {
+        return member.getId() == member.getId();
+    }
+
 }

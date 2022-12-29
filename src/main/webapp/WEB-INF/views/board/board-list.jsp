@@ -315,7 +315,7 @@
         //다음 페이지링크 걸기
         let postPage = document.getElementById('postPage');
         if (!url.includes('page')) {
-            postPage.href = url + "&page=1";
+            if(postPage!=null) postPage.href = url + "&page=1";
         } else {
             let lastIndex = url.lastIndexOf('=');
             let postUrl = url.substring(0, lastIndex + 1);
