@@ -49,7 +49,7 @@ public class CategoryCnt implements AddCnt {
         // 2categoryOption4 3categoryOption1 4categoryOption2 9categoryOption3
         Arrays.sort(orders);
         // map 에 카테고리별 점수가 담김
-        // (categoryOption4,2) (categoryOption1,3) (categoryOption2,4) (categoryOption3,978)
+        // (categoryOption4,0) (categoryOption1,1) (categoryOption2,2) (categoryOption3,3)
         order(0,orders,orderMap,orders.length-1,0);
 
         return getScoreByGroupId(groupId);
