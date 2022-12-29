@@ -307,12 +307,12 @@
                     "       <span class='col-md-3'>" +
                     "         <b>" + replyDto.replyWriter + "</b>" +
                     "       </span>" +
-                    "       <span class='offset-md-6 col-md-3 text-right'><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + replyDto.createDate +
+                    "       <span class='offset-md-6 col-md-3 text-right'><b>" + replyDto.createDate +
                     "</b></span>" +
                     "    </div><br>" +
                     "    <div class='row'>" +
                     "       <div class='col-md-6'>" + replyDto.replyText + "</div>" +
-                    "       <div class='offset-md-2 col-md-4 text-center'>" +
+                    "       <div class='offset-md-1 col-md-5 text-center'>" +
 
                     button +
 

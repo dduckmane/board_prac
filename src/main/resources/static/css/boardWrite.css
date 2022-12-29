@@ -12,8 +12,9 @@ h3,
 .title {
     font-family: 'Noto Sans KR', sans-serif;
 }
-.btn:hover {
+.btn-outline-secondary:hover {
     background: none; !important;
+    color: #000;
 }
 
 #top {

@@ -38,8 +38,8 @@ h3,
   position: relative;
   height: 35vh;
 }
-.btn:hover {
-  background: none; !important;
+.btn-outline-danger:hover {
+  background: transparent; !important;
 }
 
 #top .overlay {
