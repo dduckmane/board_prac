@@ -78,7 +78,7 @@
                     <input type="checkbox" class="btn-check tag" name="tag"
                            value=${tag} <c:if test="${fn:contains(boardSaveForm.tag,tag)}">checked</c:if>
                            id=${status.index}>
-                    <label class="btn btn-outline-secondary" for=${status.index}>${tag.description}</label>
+                    <label class="btn btn-outline-secondary tagButton" for=${status.index}>${tag.description}</label>
                 </c:forEach>
 
 

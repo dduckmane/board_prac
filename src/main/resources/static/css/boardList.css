@@ -38,6 +38,9 @@ h3,
   position: relative;
   height: 35vh;
 }
+.btn:hover {
+  background: none; !important;
+}
 
 #top .overlay {
   position: absolute;
