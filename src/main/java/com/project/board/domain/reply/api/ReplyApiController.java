@@ -42,7 +42,7 @@ public class ReplyApiController {
                 .results(results)
                 .build();
     }
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<String> save(
             @AuthenticationPrincipal PrincipalDetails principalDetails
             , @RequestBody ReplySaveDto replySaveDto
@@ -57,16 +57,20 @@ public class ReplyApiController {
     }
     @PutMapping("/{replyId}")
     public ResponseEntity<String> update(
-            @PathVariable Long replyId
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+            , @PathVariable Long replyId
             , @RequestBody ReplyUpdateDto replyUpdateDto
     ){
-        replyService.update(replyId, replyUpdateDto.getReplyText());
+        replyService.update(replyId, principalDetails.getMember(), replyUpdateDto.getReplyText());
 
         return new ResponseEntity<>("update",HttpStatus.OK);
     }
     @DeleteMapping("/{replyId}")
-    public ResponseEntity<String> delete(@PathVariable Long replyId){
-        replyService.delete(replyId);
+    public ResponseEntity<String> delete(
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+            , @PathVariable Long replyId
+    ){
+        replyService.delete(replyId, principalDetails.getMember());
 
         return new ResponseEntity<>("delete",HttpStatus.OK);
     }

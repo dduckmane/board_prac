@@ -25,16 +25,16 @@ public class ReplyService {
         return saveReply.getId();
     }
     @Transactional
-    public void update(Long replyId,String replyText){
+    public void update(Long replyId, Member member, String replyText){
         Reply reply = replyRepository.findById(replyId).orElseThrow();
 
-        reply.update(replyText);
+        if(reply.checkMySelf(member)) reply.update(replyText);
     }
     @Transactional
-    public void delete(Long replyId){
+    public void delete(Long replyId, Member member){
         Reply reply = replyRepository.findById(replyId).orElseThrow();
 
-        replyRepository.delete(reply);
+        if(reply.checkMySelf(member)) replyRepository.delete(reply);
     }
 
 }

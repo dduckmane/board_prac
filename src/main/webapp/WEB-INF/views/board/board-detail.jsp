@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -25,6 +27,12 @@
 </section>
 
 <div style="padding: 3rem 3rem;"></div>
+
+<div id="username" class="d-none">
+    <sec:authorize access="isAuthenticated()">
+        <sec:authentication property="principal.member.username"/>
+    </sec:authorize>
+</div>
 
 <section id="buttonSection">
     <div class="d-flex justify-content-center align-items-center">
@@ -275,13 +283,12 @@
 
     // 댓글 목록 DOM을 생성하는 함수
     function makeReplyDOM(listDto) {
-        console.log(listDto);
+        let textContent = document.getElementById('username').textContent.trim();
         let nowPage = listDto.nowPage;
         let endPage = listDto.endPage;
         let startPage = listDto.startPage;
         let content = listDto.results.content;
         let results = listDto.results;
-        let totalElements = results.totalElements;
         let last = results.last;
         let first = results.first;
         // 각 댓글 하나의 태그
@@ -290,6 +297,11 @@
             tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다</div>";
         } else {
             for (let replyDto of content) {
+                let button='';
+                if(textContent==replyDto.username){
+                    button += "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' data-bs-toggle='modal' data-bs-target='#replyModifyModal'>수정</a>&nbsp;" +
+                              "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>"
+                }
                 tag += "<div id='replyContent' class='card-body' data-replyId='" + replyDto.id + "'>" +
                     "    <div class='row user-block'>" +
                     "       <span class='col-md-3'>" +
@@ -300,9 +312,10 @@
                     "    </div><br>" +
                     "    <div class='row'>" +
                     "       <div class='col-md-6'>" + replyDto.replyText + "</div>" +
-                    "       <div class='offset-md-2 col-md-4 text-right'>" +
-                    "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' data-bs-toggle='modal' data-bs-target='#replyModifyModal'>수정</a>&nbsp;" +
-                    "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>" +
+                    "       <div class='offset-md-1 col-md-5 text-center'>" +
+
+                    button +
+
                     "       </div>" +
                     "    </div>" +
                     " </div>";

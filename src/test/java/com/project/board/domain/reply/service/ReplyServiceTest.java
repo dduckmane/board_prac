@@ -2,8 +2,10 @@ package com.project.board.domain.reply.service;
 
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.member.domain.Member;
+import com.project.board.domain.member.repository.MemberRepository;
 import com.project.board.domain.reply.domain.Reply;
 import com.project.board.domain.reply.repository.ReplyRepository;
+import com.project.board.global.domainConst.MemberConst;
 import com.project.board.global.testInit.TestInit;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ class ReplyServiceTest extends TestInit {
     ReplyService replyService;
     @Autowired
     ReplyRepository replyRepository;
+    @Autowired
+    MemberRepository memberRepository;
     @Test
     void save() {
         //given
@@ -39,15 +43,18 @@ class ReplyServiceTest extends TestInit {
     @Test
     void update() {
         //given
+        Board board = boardHelper.createBoard();
+        Member member = memberRepository.findByUsername(MemberConst.USERNAME).orElseThrow();
+
         Long replyId = replyService.save(
-                boardHelper.createBoard().getId()
-                , memberHelper.createMember()
+                board.getId()
+                , member
                 , "replyText"
         );
 
         String updateReplyText = "update";
         //when
-        replyService.update(replyId,updateReplyText);
+        replyService.update(replyId, member , updateReplyText);
         //then
         Reply reply = replyRepository.findById(replyId).orElseThrow();
 
@@ -57,14 +64,17 @@ class ReplyServiceTest extends TestInit {
     @Test
     void delete() {
         //given
+        Board board = boardHelper.createBoard();
+        Member member = memberRepository.findByUsername(MemberConst.USERNAME).orElseThrow();
+
         Long replyId = replyService.save(
-                boardHelper.createBoard().getId()
-                , memberHelper.createMember()
+                board.getId()
+                , member
                 , "replyText"
         );
 
         //when
-        replyService.delete(replyId);
+        replyService.delete(replyId, member);
         //then
         assertThrows(NoSuchElementException.class,
                 () -> replyRepository.findById(replyId).orElseThrow());
